@@ -73,35 +73,9 @@ export default function DashboardPage() {
 
     if (!isLoaded) {
         return (
-            <div className="flex justify-center items-center h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 relative overflow-hidden">
-                {/* Animated background blobs */}
+            <div className="flex justify-center items-center h-screen bg-white dark:bg-gray-950 relative overflow-hidden">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <motion.div
-                        className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"
-                        animate={{
-                            x: [0, 100, 0],
-                            y: [0, 50, 0],
-                            scale: [1, 1.2, 1],
-                        }}
-                        transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                    />
-                    <motion.div
-                        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
-                        animate={{
-                            x: [0, -100, 0],
-                            y: [0, -50, 0],
-                            scale: [1, 1.1, 1],
-                        }}
-                        transition={{
-                            duration: 15,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                    />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60rem] h-[60rem] bg-gradient-to-b from-gray-100/80 to-transparent dark:from-white/5 rounded-full blur-3xl" />
                 </div>
                 <motion.div
                     className="text-center relative z-10"
@@ -110,7 +84,7 @@ export default function DashboardPage() {
                     transition={{ duration: 0.5 }}
                 >
                     <div className="w-16 h-16 mx-auto mb-6 relative">
-                        <div className="absolute inset-0 border-4 border-transparent border-t-blue-500 border-r-purple-500 rounded-full animate-spin"></div>
+                        <div className="absolute inset-0 border-4 border-transparent border-t-gray-900 dark:border-t-white border-r-gray-400 rounded-full animate-spin"></div>
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">Loading your agents...</p>
                 </motion.div>
@@ -119,44 +93,18 @@ export default function DashboardPage() {
     }
 
     return (
-        <div className="h-screen flex overflow-hidden bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 relative">
-            {/* Animated background blobs */}
+        <div className="h-screen flex overflow-hidden bg-white dark:bg-gray-950 relative">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <motion.div
-                    className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl"
-                    animate={{
-                        x: [0, 100, 0],
-                        y: [0, 50, 0],
-                        scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                />
-                <motion.div
-                    className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
-                    animate={{
-                        x: [0, -100, 0],
-                        y: [0, -50, 0],
-                        scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60rem] h-[60rem] bg-gradient-to-b from-gray-100/80 to-transparent dark:from-white/5 rounded-full blur-3xl" />
             </div>
 
             {/* Mobile Header */}
-            <div className="lg:hidden fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 px-4 py-3 flex items-center gap-3 z-10">
+            <div className="lg:hidden fixed top-0 left-0 right-0 bg-white/90 dark:bg-gray-950/80 backdrop-blur-xl border-b border-gray-200/70 dark:border-white/10 px-4 py-3 flex items-center gap-3 z-10">
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
+                    className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-colors"
                 >
                     <Menu className="h-5 w-5" />
                 </motion.button>
@@ -167,7 +115,7 @@ export default function DashboardPage() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3 }}
                     >
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-semibold shadow-lg shadow-blue-500/30">
+                        <div className="w-8 h-8 rounded-full bg-gray-900 dark:bg-white flex items-center justify-center text-white dark:text-gray-900 text-sm font-semibold shadow-sm">
                             {selectedAgent.logo_url ? (
                                 <img src={selectedAgent.logo_url} alt={selectedAgent.name} className="w-full h-full rounded-full object-cover" />
                             ) : (
@@ -184,8 +132,8 @@ export default function DashboardPage() {
                 className={`
             fixed lg:relative inset-y-0 left-0 z-20
             w-full lg:w-[30%] max-w-sm
-            bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl
-            border-r border-gray-200/50 dark:border-gray-800/50
+            bg-white/90 dark:bg-gray-950/85 backdrop-blur-xl
+            border-r border-gray-200/70 dark:border-white/10
             transform transition-transform duration-300 ease-in-out
             ${isMobileSidebarOpen
                         ? "translate-x-0"

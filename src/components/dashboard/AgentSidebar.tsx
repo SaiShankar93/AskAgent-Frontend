@@ -86,7 +86,7 @@ export default function AgentSidebar({
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200/50 dark:border-gray-800/50">
+      <div className="p-6 border-b border-gray-200/70 dark:border-white/10">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
@@ -99,7 +99,7 @@ export default function AgentSidebar({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-colors"
               title="Toggle theme"
             >
               {theme === 'dark' ? (
@@ -125,7 +125,7 @@ export default function AgentSidebar({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onAddAgent}
-              className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-xl transition-all shadow-lg shadow-blue-500/30"
+              className="p-2 bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm"
               title="Add New Agent"
             >
               <Plus className="h-5 w-5" />
@@ -135,7 +135,7 @@ export default function AgentSidebar({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={onCloseMobile}
-                className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl"
+                className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl"
               >
                 <X className="h-5 w-5" />
               </motion.button>
@@ -156,7 +156,7 @@ export default function AgentSidebar({
             placeholder="Search agents..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent text-sm transition-all"
+            className="w-full pl-11 pr-4 py-3 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/70 dark:border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 focus:border-transparent text-sm transition-all"
           />
         </motion.div>
       </div>
@@ -169,7 +169,7 @@ export default function AgentSidebar({
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
             >
-              <div className="w-12 h-12 border-4 border-transparent border-t-blue-500 border-r-purple-500 rounded-full"></div>
+              <div className="w-12 h-12 border-4 border-transparent border-t-gray-900 dark:border-t-white border-r-gray-400 rounded-full"></div>
             </motion.div>
           </div>
         ) : filteredAgents.length === 0 ? (
@@ -179,7 +179,7 @@ export default function AgentSidebar({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+            <div className="w-20 h-20 bg-gray-100 dark:bg-white/10 rounded-2xl flex items-center justify-center mb-4 shadow-sm">
               <Plus className="h-10 w-10 text-gray-400" />
             </div>
             <h3 className="text-lg font-bold mb-2 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
@@ -195,7 +195,7 @@ export default function AgentSidebar({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={onAddAgent}
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-xl font-medium transition-all shadow-lg shadow-blue-500/30"
+                className="px-6 py-3 bg-gray-900 hover:bg-black text-white rounded-xl font-medium transition-all shadow-sm"
               >
                 Create Agent
               </motion.button>
@@ -220,15 +220,15 @@ export default function AgentSidebar({
                     onClick={() => onSelectAgent(agent.id)}
                     className={`w-full p-4 flex items-start gap-3 rounded-2xl transition-all text-left group ${
                       isSelected 
-                        ? 'bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 shadow-xl shadow-blue-500/10 border-2 border-blue-500/20' 
-                        : 'bg-white/50 dark:bg-gray-800/30 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-gray-800/50 border border-gray-200/50 dark:border-gray-700/50 hover:shadow-lg'
+                        ? 'bg-gray-100/80 dark:bg-white/10 shadow-sm border border-gray-300/60 dark:border-white/15' 
+                        : 'bg-white/50 dark:bg-gray-900/40 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-gray-900/60 border border-gray-200/50 dark:border-white/10 hover:shadow-lg'
                     }`}
                   >
                     {/* Avatar/Icon */}
-                    <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white font-semibold shadow-lg transition-transform group-hover:scale-110 ${
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white dark:text-gray-900 font-semibold shadow-sm transition-transform group-hover:scale-110 ${
                       agent.type === 'website' 
-                        ? 'bg-gradient-to-br from-blue-500 to-cyan-500 shadow-blue-500/30' 
-                        : 'bg-gradient-to-br from-purple-500 to-pink-500 shadow-purple-500/30'
+                        ? 'bg-gray-900 dark:bg-white' 
+                        : 'bg-gray-900 dark:bg-white'
                     }`}>
                       {agent.logo_url ? (
                         <img
@@ -245,7 +245,7 @@ export default function AgentSidebar({
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className={`font-semibold truncate ${
-                          isSelected ? 'bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent' : 'text-gray-900 dark:text-white'
+                          isSelected ? 'text-gray-900 dark:text-white' : 'text-gray-900 dark:text-white'
                         }`}>
                           {agent.name}
                         </h3>
@@ -255,11 +255,7 @@ export default function AgentSidebar({
                         {agent.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className={`text-xs px-2.5 py-1 rounded-full font-medium backdrop-blur-sm ${
-                          agent.type === 'website'
-                            ? 'bg-blue-100/80 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50'
-                            : 'bg-purple-100/80 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 border border-purple-200/50 dark:border-purple-800/50'
-                        }`}>
+                        <span className="text-xs px-2.5 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200 border border-gray-200/70 dark:border-white/10">
                           {agent.type}
                         </span>
                       </div>
@@ -273,10 +269,10 @@ export default function AgentSidebar({
       </div>
 
       {/* Footer Info */}
-      <div className="p-4 border-t border-gray-200/50 dark:border-gray-800/50">
+      <div className="p-4 border-t border-gray-200/70 dark:border-white/10">
         <div className="text-xs text-gray-500 dark:text-gray-400 text-center font-medium">
           <span className="inline-flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-gray-900 dark:bg-white animate-pulse"></span>
             {agents.length} {agents.length === 1 ? 'agent' : 'agents'} created
           </span>
         </div>

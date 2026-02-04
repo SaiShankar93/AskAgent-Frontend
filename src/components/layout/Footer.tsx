@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { Heart, Sparkles, Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer() {
@@ -33,34 +32,29 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="relative bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 border-t border-gray-200 dark:border-gray-800 overflow-hidden">
-            {/* Background effects */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-accent-500/5" />
-            <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl" />
+        <footer className="relative bg-white dark:bg-gray-950 border-t border-gray-200/70 dark:border-white/10 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(15,23,42,0.05),_transparent_55%)] dark:bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.08),_transparent_55%)]" />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-                {/* Top section */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                    {/* Brand column */}
                     <div className="md:col-span-1">
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center shadow-lg">
-                                <Sparkles className="w-5 h-5 text-white" />
+                            <div className="w-9 h-9 rounded-xl bg-gray-900 dark:bg-white flex items-center justify-center shadow-sm">
+                                <Sparkles className="w-4 h-4 text-white dark:text-gray-900" />
                             </div>
-                            <span className="text-2xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
+                            <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 AskAgent
                             </span>
                         </div>
                         <p className="text-gray-600 dark:text-gray-400 mb-6">
-                            Transform websites and documents into intelligent AI assistants with RAG technology.
+                            Transform websites and documents into intelligent AI assistants with a refined, human-first experience.
                         </p>
                         <div className="flex gap-3">
                             <a
                                 href="https://github.com/SaiShankar93"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-xl bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-to-br hover:from-primary-500 hover:to-secondary-500 hover:text-white transition-all duration-300 hover:scale-110"
+                                className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300"
                             >
                                 <Github className="w-5 h-5" />
                             </a>
@@ -68,23 +62,22 @@ export default function Footer() {
                                 href="https://www.linkedin.com/in/sai-shankar-punna/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-xl bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-to-br hover:from-primary-500 hover:to-secondary-500 hover:text-white transition-all duration-300 hover:scale-110"
+                                className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300"
                             >
                                 <Linkedin className="w-5 h-5" />
                             </a>
                             <a
                                 href="mailto:contact@saishankar.tech"
-                                className="w-10 h-10 rounded-xl bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-to-br hover:from-primary-500 hover:to-secondary-500 hover:text-white transition-all duration-300 hover:scale-110"
+                                className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300"
                             >
                                 <Mail className="w-5 h-5" />
                             </a>
                         </div>
                     </div>
 
-                    {/* Links columns */}
                     {footerLinks.map((column) => (
                         <div key={column.title}>
-                            <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+                            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
                                 {column.title}
                             </h3>
                             <ul className="space-y-3">
@@ -94,7 +87,7 @@ export default function Footer() {
                                             href={link.href}
                                             target={link.href.startsWith('http') ? '_blank' : undefined}
                                             rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                            className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+                                            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
                                         >
                                             {link.label}
                                         </a>
@@ -105,22 +98,20 @@ export default function Footer() {
                     ))}
                 </div>
 
-                {/* Divider */}
-                <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
-                    {/* Bottom section */}
+                <div className="border-t border-gray-200/70 dark:border-white/10 pt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                             © {currentYear} AskAgent. All rights reserved.
                         </p>
                         <p className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                             Made with{' '}
-                            <Heart className="h-4 w-4 mx-1.5 text-red-500 animate-pulse" fill="currentColor" />
+                            <Heart className="h-4 w-4 mx-1.5 text-rose-500" fill="currentColor" />
                             by{' '}
                             <a
                                 href="https://www.linkedin.com/in/sai-shankar-punna/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="ml-1.5 font-semibold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent hover:from-primary-500 hover:to-secondary-500 transition-all"
+                                className="ml-1.5 font-semibold text-gray-900 dark:text-white hover:opacity-70 transition-all"
                             >
                                 Sai Shankar Punna
                             </a>

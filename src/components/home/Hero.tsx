@@ -8,14 +8,14 @@ import { motion } from 'framer-motion';
 import { useUser, SignUpButton } from '@clerk/nextjs';
 
 export default function Hero() {
-  const { isSignedIn, isLoaded } = useUser();
+  const { isSignedIn } = useUser();
   const [typedText, setTypedText] = useState('');
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const texts = [
     'Transform websites into AI assistants',
     'Build RAG-powered chatbots instantly',
     'Get intelligent answers from your data',
-    'Deploy conversational AI in minutes'
+    'Deploy conversational AI in minutes',
   ];
 
   // Typewriter effect
@@ -37,20 +37,19 @@ export default function Hero() {
   }, [typedText, currentTextIndex, texts]);
 
   const features = [
-    { icon: Sparkles, text: 'AI-Powered', gradient: 'from-blue-500 to-cyan-500' },
-    { icon: Zap, text: 'Lightning Fast', gradient: 'from-purple-500 to-pink-500' },
-    { icon: Shield, text: 'Secure & Private', gradient: 'from-orange-500 to-red-500' },
-    { icon: Globe, text: 'Any Website', gradient: 'from-green-500 to-emerald-500' }
+    { icon: Sparkles, text: 'AI-Powered', gradient: 'from-slate-900 to-slate-700' },
+    { icon: Zap, text: 'Lightning Fast', gradient: 'from-gray-900 to-gray-700' },
+    { icon: Shield, text: 'Secure & Private', gradient: 'from-slate-800 to-slate-600' },
+    { icon: Globe, text: 'Any Website', gradient: 'from-gray-800 to-gray-600' },
   ];
 
   return (
-    <div className="relative overflow-hidden min-h-screen flex items-center">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-accent-500/5" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-      
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="relative overflow-hidden min-h-screen flex items-center bg-white dark:bg-gray-950">
+      {/* Ambient background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(15,23,42,0.06),_transparent_45%)] dark:bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.08),_transparent_50%)]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60rem] h-[60rem] bg-gradient-to-b from-gray-100/60 to-transparent dark:from-white/5 rounded-full blur-3xl" />
+
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Content */}
           <motion.div
@@ -58,46 +57,43 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Badge */}
-            {/* <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary-500/10 to-secondary-500/10 border border-primary-500/20 mb-6"
+              transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 text-xs font-medium tracking-wide uppercase dark:bg-white/10 dark:text-gray-200 mb-6"
             >
-              <Sparkles className="w-4 h-4 text-primary-500" />
-              <span className="text-sm font-semibold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                Powered by OpenAI & RAG Technology
-              </span>
-            </motion.div> */}
+              <Sparkles className="w-4 h-4" />
+              <span>Built for thoughtful AI experiences</span>
+            </motion.div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
-              <span className="block bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
-                AskAgent
-              </span>
-              <span className="block mt-2 text-gray-900 dark:text-white min-h-[120px]">
-                {typedText}<span className="animate-pulse text-primary-500">|</span>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight mb-6 text-gray-900 dark:text-white">
+              <span className="block">AskAgent</span>
+              <span className="block mt-3 text-gray-700 dark:text-gray-200 min-h-[120px]">
+                {typedText}<span className="animate-pulse text-gray-400">|</span>
               </span>
             </h1>
-            
+
             {/* Description */}
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              Transform any website or document into an intelligent AI assistant. 
-              Powered by advanced RAG technology, OpenAI, and vector search for accurate, context-aware responses.
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
+              Give every visitor a refined, concierge-like experience. AskAgent turns your content into a calm,
+              intelligent assistant that feels native to your brand.
             </p>
-            
+
             {/* Feature Pills */}
-            <div className="flex flex-wrap gap-3 mb-10">
+            <div className="flex flex-wrap gap-3 mb-12">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 + index * 0.1 }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 dark:bg-gray-900/70 border border-gray-200/60 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${feature.gradient} flex items-center justify-center`}>
+                  <div
+                    className={`w-8 h-8 rounded-full bg-gradient-to-br ${feature.gradient} flex items-center justify-center`}
+                  >
                     <feature.icon className="w-4 h-4 text-white" />
                   </div>
                   <span className="font-medium text-gray-900 dark:text-white">{feature.text}</span>
@@ -114,105 +110,76 @@ export default function Hero() {
             >
               {isSignedIn ? (
                 <Link href="/dashboard">
-                  <button className="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                  <button className="group relative px-8 py-4 bg-gray-900 text-white rounded-xl font-semibold shadow-sm hover:shadow-md transition-all duration-300">
                     <span className="relative z-10 flex items-center justify-center gap-2">
                       Go to Dashboard
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-secondary-500 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </button>
                 </Link>
               ) : (
-                <SignUpButton mode="modal">
-                  <button className="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden">
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Get Started Free
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-secondary-500 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </button>
-                </SignUpButton>
+                <>
+                  <SignUpButton mode="modal">
+                    <button className="group relative px-8 py-4 bg-gray-900 text-white rounded-xl font-semibold shadow-sm hover:shadow-md transition-all duration-300">
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        Start Free Trial
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </button>
+                  </SignUpButton>
+                  <Link href="#how-it-works">
+                    <button className="px-8 py-4 border border-gray-300 dark:border-white/15 text-gray-700 dark:text-gray-200 rounded-xl font-semibold hover:border-gray-900 hover:text-gray-900 dark:hover:border-white dark:hover:text-white transition-all duration-300">
+                      See How It Works
+                    </button>
+                  </Link>
+                </>
               )}
-              
-              <a href="#how-it-works">
-                <button className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl font-semibold border-2 border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  See How It Works
-                </button>
-              </a>
             </motion.div>
           </motion.div>
-          
-          {/* Right Column - Visual */}
+
+          {/* Right Column - Image */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            {/* Main Card */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 p-8">
-              {/* Chat Interface Mockup */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 pb-4 border-b border-gray-200 dark:border-gray-700">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center">
-                    <Sparkles className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white">AI Assistant</h3>
-                    <p className="text-sm text-gray-500">Always ready to help</p>
-                  </div>
-                </div>
+            <div className="relative rounded-3xl overflow-hidden shadow-[0_40px_120px_rgba(15,23,42,0.18)] bg-white/90 dark:bg-gray-900/70 backdrop-blur border border-gray-200/60 dark:border-white/10">
+              <Image
+                src="/chat-interface-mockup.svg"
+                alt="Chat interface preview"
+                width={640}
+                height={480}
+                className="w-full h-auto"
+                priority
+              />
+            </div>
 
-                {/* Chat Messages */}
-                <div className="space-y-3">
-                  <div className="flex justify-end">
-                    <div className="bg-gradient-to-br from-primary-500 to-secondary-500 text-white px-4 py-3 rounded-2xl rounded-tr-sm max-w-[80%] shadow-lg">
-                      What services do you offer?
-                    </div>
-                  </div>
-                  <div className="flex justify-start">
-                    <div className="bg-gray-100 dark:bg-gray-800 px-4 py-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-lg border border-gray-200 dark:border-gray-700">
-                      <p className="text-gray-900 dark:text-white">Based on your content, we offer comprehensive web development, AI integration, and custom software solutions. Would you like to know more about any specific service?</p>
-                    </div>
-                  </div>
-                  <div className="flex justify-end">
-                    <div className="bg-gradient-to-br from-primary-500 to-secondary-500 text-white px-4 py-3 rounded-2xl rounded-tr-sm max-w-[70%] shadow-lg">
-                      Tell me about AI integration
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-secondary-500 rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce delay-200" />
-                  </div>
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -top-6 -right-6 bg-white dark:bg-gray-900 p-4 rounded-2xl shadow-lg border border-gray-200/60 dark:border-white/10"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Live Responses</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -bottom-6 -left-6 bg-white dark:bg-gray-900 p-4 rounded-2xl shadow-lg border border-gray-200/60 dark:border-white/10"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-gray-900 dark:bg-white flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-white dark:text-gray-900" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Security</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">Enterprise-grade</p>
                 </div>
               </div>
-
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/10 to-secondary-500/10 pointer-events-none" />
-            </div>
-            
-            {/* Floating decorative elements */}
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-500/30 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary-500/30 rounded-full blur-3xl animate-pulse delay-1000" />
-            
-            {/* Floating badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.5 }}
-              className="absolute -top-6 -left-6 px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-xl border border-gray-200 dark:border-gray-700"
-            >
-              <span className="text-sm font-semibold text-gray-900 dark:text-white">⚡ Real-time Responses</span>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-              className="absolute -bottom-6 -right-6 px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-xl border border-gray-200 dark:border-gray-700"
-            >
-              <span className="text-sm font-semibold text-gray-900 dark:text-white">🎯 Context-Aware</span>
             </motion.div>
           </motion.div>
         </div>

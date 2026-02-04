@@ -161,13 +161,13 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                             onClick={(e) => e.stopPropagation()}
                         >
                         {/* Header */}
-                        <div className="flex items-center justify-between p-6 border-b border-gray-200/50 dark:border-gray-700/50 flex-shrink-0">
+                        <div className="flex items-center justify-between p-6 border-b border-gray-200/70 dark:border-white/10 flex-shrink-0">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                                    <Sparkles className="h-5 w-5 text-white" />
+                                <div className="w-10 h-10 rounded-xl bg-gray-900 dark:bg-white flex items-center justify-center shadow-sm">
+                                    <Sparkles className="h-5 w-5 text-white dark:text-gray-900" />
                                 </div>
                                 <div>
-                                    <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                                         Add New Agent
                                     </h2>
                                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
@@ -179,21 +179,21 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                 whileHover={{ scale: 1.1, rotate: 90 }}
                                 whileTap={{ scale: 0.9 }}
                                 onClick={onClose}
-                                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors"
+                                className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-colors"
                             >
                                 <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                             </motion.button>
                         </div>
 
                         {/* Tabs */}
-                        <div className="flex border-b border-gray-200/50 dark:border-gray-700/50 flex-shrink-0">
+                        <div className="flex border-b border-gray-200/70 dark:border-white/10 flex-shrink-0">
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => handleTabChange('website')}
                                 className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 font-medium transition-all ${activeTab === 'website'
-                                        ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50/50 dark:bg-blue-900/20'
-                                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50/50 dark:hover:bg-gray-700/30'
+                                        ? 'text-gray-900 dark:text-white border-b-2 border-gray-900 dark:border-white bg-gray-100/70 dark:bg-white/10'
+                                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50/70 dark:hover:bg-white/10'
                                     }`}
                             >
                                 <Globe className="w-5 h-5" />
@@ -204,8 +204,8 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => handleTabChange('document')}
                                 className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 font-medium transition-all ${activeTab === 'document'
-                                        ? 'text-purple-600 dark:text-purple-400 border-b-2 border-purple-600 dark:border-purple-400 bg-purple-50/50 dark:bg-purple-900/20'
-                                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50/50 dark:hover:bg-gray-700/30'
+                                        ? 'text-gray-900 dark:text-white border-b-2 border-gray-900 dark:border-white bg-gray-100/70 dark:bg-white/10'
+                                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50/70 dark:hover:bg-white/10'
                                     }`}
                             >
                                 <FileText className="w-5 h-5" />
@@ -226,8 +226,8 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                         >
                             <div>
                                 <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                                    <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-sm">
-                                        <LinkIcon className="w-3.5 h-3.5 text-white" />
+                                    <div className="w-6 h-6 rounded-lg bg-gray-900 dark:bg-white flex items-center justify-center shadow-sm">
+                                        <LinkIcon className="w-3.5 h-3.5 text-white dark:text-gray-900" />
                                     </div>
                                     Website URL
                                 </label>
@@ -236,7 +236,7 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                     value={formData.url || ''}
                                     onChange={(e) => handleInputChange('url', e.target.value)}
                                     placeholder="https://example.com"
-                                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-transparent bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                                    className="w-full px-4 py-3 border border-gray-300/60 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 focus:border-transparent bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                                 />
                                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 ml-1">
                                     Enter the URL of the website you want to scrape and create a knowledge base from
@@ -252,7 +252,7 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                     value={formData.name}
                                     onChange={(e) => handleInputChange('name', e.target.value)}
                                     placeholder="My Company Website"
-                                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-transparent bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                                    className="w-full px-4 py-3 border border-gray-300/60 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 focus:border-transparent bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                                 />
                             </div>
 
@@ -265,7 +265,7 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                     onChange={(e) => handleInputChange('description', e.target.value)}
                                     placeholder="A brief description of what this agent knows about..."
                                     rows={3}
-                                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-transparent bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none transition-all"
+                                    className="w-full px-4 py-3 border border-gray-300/60 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 focus:border-transparent bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none transition-all"
                                 />
                             </div>
                         </motion.div>
@@ -291,8 +291,8 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                     onDrop={handleDrop}
                                     whileHover={{ scale: dragActive ? 1 : 1.01 }}
                                     className={`relative border-2 border-dashed rounded-2xl p-8 text-center transition-all backdrop-blur-sm ${dragActive
-                                            ? 'border-purple-500 bg-purple-50/50 dark:bg-purple-900/20 scale-105'
-                                            : 'border-gray-300/50 dark:border-gray-600/50 hover:border-gray-400 dark:hover:border-gray-500 bg-white/30 dark:bg-gray-800/30'
+                                            ? 'border-gray-900 dark:border-white bg-gray-100/70 dark:bg-white/10 scale-105'
+                                            : 'border-gray-300/60 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/20 bg-white/40 dark:bg-gray-900/40'
                                         }`}
                                 >
                                     <input
@@ -310,8 +310,8 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                             animate={{ scale: 1, opacity: 1 }}
                                         >
                                             <div className="flex items-center justify-center">
-                                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-green-500/30">
-                                                    <CheckCircle2 className="w-8 h-8 text-white" />
+                                                <div className="w-16 h-16 rounded-2xl bg-gray-900 dark:bg-white flex items-center justify-center shadow-sm">
+                                                    <CheckCircle2 className="w-8 h-8 text-white dark:text-gray-900" />
                                                 </div>
                                             </div>
                                             <div>
@@ -335,14 +335,14 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                     ) : (
                                         <div className="space-y-4">
                                             <div className="flex items-center justify-center">
-                                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
-                                                    <Upload className="w-8 h-8 text-white" />
+                                                <div className="w-16 h-16 rounded-2xl bg-gray-900 dark:bg-white flex items-center justify-center shadow-sm">
+                                                    <Upload className="w-8 h-8 text-white dark:text-gray-900" />
                                                 </div>
                                             </div>
                                             <div>
                                                 <label
                                                     htmlFor="file-upload"
-                                                    className="cursor-pointer text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold"
+                                                    className="cursor-pointer text-gray-900 dark:text-white hover:opacity-70 font-semibold"
                                                 >
                                                     Click to upload
                                                 </label>
@@ -365,7 +365,7 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                     value={formData.name}
                                     onChange={(e) => handleInputChange('name', e.target.value)}
                                     placeholder="Product Documentation"
-                                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-transparent bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                                    className="w-full px-4 py-3 border border-gray-300/60 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 focus:border-transparent bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                                 />
                             </div>
 
@@ -378,7 +378,7 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                     onChange={(e) => handleInputChange('description', e.target.value)}
                                     placeholder="A brief description of what this agent knows about..."
                                     rows={3}
-                                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-transparent bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none transition-all"
+                                    className="w-full px-4 py-3 border border-gray-300/60 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 focus:border-transparent bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none transition-all"
                                 />
                             </div>
                         </motion.div>
@@ -386,7 +386,7 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                 </form>
 
                 {/* Footer */}
-                <div className="flex flex-col gap-3 p-6 border-t border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-br from-gray-50 to-blue-50/30 dark:from-gray-900/50 dark:to-blue-900/10 flex-shrink-0">
+                <div className="flex flex-col gap-3 p-6 border-t border-gray-200/70 dark:border-white/10 bg-gray-50/70 dark:bg-white/5 flex-shrink-0">
                     {/* Status Messages */}
                     {uploadStatus === 'success' && (
                         <motion.div 
@@ -433,8 +433,8 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                 whileTap={{ scale: isFormValid() && uploadStatus !== 'uploading' ? 0.95 : 1 }}
                                 onClick={handleSubmit}
                                 disabled={!isFormValid() || uploadStatus === 'uploading'}
-                                className={`flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white rounded-xl transition-all shadow-lg ${isFormValid() && uploadStatus !== 'uploading'
-                                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 shadow-blue-500/30'
+                                className={`flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white rounded-xl transition-all shadow-sm ${isFormValid() && uploadStatus !== 'uploading'
+                                        ? 'bg-gray-900 hover:bg-black'
                                         : 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed opacity-50 shadow-none'
                                     }`}
                             >

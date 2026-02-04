@@ -128,7 +128,7 @@ export default function AskAgentWidget({
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={\`fixed bottom-4 \${positionClass} w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition-transform z-50\`}
+        className={\`fixed bottom-4 \${positionClass} w-14 h-14 bg-gray-900 rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition-transform z-50\`}
       >
         {isOpen ? '✕' : '💬'}
       </button>
@@ -136,7 +136,7 @@ export default function AskAgentWidget({
       {/* Chat Window */}
       {isOpen && (
         <div className={\`fixed bottom-20 \${positionClass} w-80 h-96 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-gray-200 dark:border-gray-700\`}>
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 text-white font-semibold">
+          <div className="bg-gray-900 px-4 py-3 text-white font-semibold">
             ${agentName || 'AI Assistant'}
           </div>
           
@@ -145,7 +145,7 @@ export default function AskAgentWidget({
               <div key={msg.id} className={\`flex \${msg.role === 'user' ? 'justify-end' : 'justify-start'}\`}>
                 <div className={\`max-w-[80%] px-3 py-2 rounded-xl \${
                   msg.role === 'user' 
-                    ? 'bg-blue-500 text-white' 
+                    ? 'bg-gray-900 text-white' 
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white'
                 }\`}>
                   {msg.content}
@@ -163,12 +163,12 @@ export default function AskAgentWidget({
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                 placeholder="Type a message..."
-                className="flex-1 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/20"
               />
               <button
                 onClick={sendMessage}
                 disabled={loading}
-                className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:opacity-50"
+                className="px-4 py-2 bg-gray-900 text-white rounded-xl hover:bg-black disabled:opacity-50"
               >
                 Send
               </button>
@@ -246,7 +246,7 @@ export default function AskAgentWidget({
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={\`fixed bottom-4 \${positionClass} w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition-transform z-50\`}
+        className={\`fixed bottom-4 \${positionClass} w-14 h-14 bg-gray-900 rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition-transform z-50\`}
       >
         {isOpen ? '✕' : '💬'}
       </button>
@@ -254,7 +254,7 @@ export default function AskAgentWidget({
       {/* Chat Window */}
       {isOpen && (
         <div className={\`fixed bottom-20 \${positionClass} w-80 h-96 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-gray-200 dark:border-gray-700\`}>
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 text-white font-semibold">
+          <div className="bg-gray-900 px-4 py-3 text-white font-semibold">
             ${agentName || 'AI Assistant'}
           </div>
           
@@ -263,7 +263,7 @@ export default function AskAgentWidget({
               <div key={msg.id} className={\`flex \${msg.role === 'user' ? 'justify-end' : 'justify-start'}\`}>
                 <div className={\`max-w-[80%] px-3 py-2 rounded-xl \${
                   msg.role === 'user' 
-                    ? 'bg-blue-500 text-white' 
+                    ? 'bg-gray-900 text-white' 
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white'
                 }\`}>
                   {msg.content}
@@ -281,12 +281,12 @@ export default function AskAgentWidget({
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                 placeholder="Type a message..."
-                className="flex-1 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/20"
               />
               <button
                 onClick={sendMessage}
                 disabled={loading}
-                className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:opacity-50"
+                className="px-4 py-2 bg-gray-900 text-white rounded-xl hover:bg-black disabled:opacity-50"
               >
                 Send
               </button>
@@ -429,7 +429,7 @@ export default function AskAgentWidget({
                     transition={{ duration: 0.5 }}
                 >
                     <motion.div 
-                        className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-blue-500/30"
+                        className="w-24 h-24 bg-gray-900 dark:bg-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg"
                         animate={{
                             rotate: [0, 5, 0, -5, 0],
                             scale: [1, 1.05, 1],
@@ -440,9 +440,9 @@ export default function AskAgentWidget({
                             ease: "easeInOut"
                         }}
                     >
-                        <Bot className="h-12 w-12 text-white" />
+                        <Bot className="h-12 w-12 text-white dark:text-gray-900" />
                     </motion.div>
-                    <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                    <h3 className="text-3xl font-semibold mb-3 text-gray-900 dark:text-white">
                         Welcome to AskAgent
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto text-lg">
@@ -476,16 +476,16 @@ export default function AskAgentWidget({
         <div className="h-full flex flex-col">
             {/* Chat Header */}
             <motion.div 
-                className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 px-6 py-4 flex items-center gap-3 shadow-sm"
+                className="bg-white/90 dark:bg-gray-950/80 backdrop-blur-xl border-b border-gray-200/70 dark:border-white/10 px-6 py-4 flex items-center gap-3 shadow-sm"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
             >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold shadow-lg shadow-blue-500/30">
+                <div className="w-10 h-10 rounded-xl bg-gray-900 dark:bg-white flex items-center justify-center text-white dark:text-gray-900 font-semibold shadow-sm">
                     {agentName?.substring(0, 2).toUpperCase() || 'AI'}
                 </div>
                 <div className="flex-1">
-                    <h3 className="font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">
                         {agentName || 'AI Agent'}
                     </h3>
                     <div className="flex items-center gap-2">
@@ -496,7 +496,7 @@ export default function AskAgentWidget({
                 {/* Embed Button */}
                 <button
                     onClick={() => setShowEmbedModal(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white text-sm font-medium rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-200"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-900 hover:bg-black text-white text-sm font-medium rounded-xl shadow-sm transition-all duration-200"
                 >
                     <Code className="w-4 h-4" />
                     <span>Embed</span>
@@ -529,7 +529,7 @@ export default function AskAgentWidget({
                             onClick={() => setShowDeleteModal(false)}
                         />
                         <motion.div
-                            className="relative bg-white dark:bg-gray-900 rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-gray-200/50 dark:border-gray-700/50"
+                            className="relative bg-white dark:bg-gray-900 rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-gray-200/70 dark:border-white/10"
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -608,9 +608,9 @@ export default function AskAgentWidget({
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         >
                             {/* Modal Header */}
-                            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+                            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200/70 dark:border-white/10">
                                 <div>
-                                    <h2 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                                         Add Agent to Your Website
                                     </h2>
                                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -619,14 +619,14 @@ export default function AskAgentWidget({
                                 </div>
                                 <button
                                     onClick={() => setShowEmbedModal(false)}
-                                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
+                                    className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-colors"
                                 >
                                     <X className="w-5 h-5 text-gray-500" />
                                 </button>
                             </div>
                             
                             {/* Framework Selector */}
-                            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+                            <div className="px-6 py-4 border-b border-gray-200/70 dark:border-white/10">
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                                     Select your framework:
                                 </label>
@@ -641,8 +641,8 @@ export default function AskAgentWidget({
                                             onClick={() => setSelectedFramework(fw.id as 'react' | 'nextjs' | 'html')}
                                             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all ${
                                                 selectedFramework === fw.id
-                                                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25'
-                                                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                                                    ? 'bg-gray-900 text-white shadow-sm'
+                                                    : 'bg-gray-100 dark:bg-gray-900/70 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
                                             }`}
                                         >
                                             <span>{fw.icon}</span>
@@ -684,9 +684,9 @@ export default function AskAgentWidget({
                             </div>
                             
                             {/* Footer Instructions */}
-                            <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-800">
+                            <div className="px-6 py-4 bg-gray-50/70 dark:bg-white/5 border-t border-gray-200/70 dark:border-white/10">
                                 <div className="flex items-start gap-3">
-                                    <Sparkles className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                                    <Sparkles className="w-5 h-5 text-gray-900 dark:text-white mt-0.5 flex-shrink-0" />
                                     <div className="text-sm text-gray-600 dark:text-gray-400">
                                         {selectedFramework === 'html' ? (
                                             <p>Paste this code just before the closing <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded">&lt;/body&gt;</code> tag in your HTML file.</p>
@@ -710,7 +710,7 @@ export default function AskAgentWidget({
                             animate={{ rotate: 360 }}
                             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                         >
-                            <div className="w-12 h-12 border-4 border-transparent border-t-blue-500 border-r-purple-500 rounded-full"></div>
+                            <div className="w-12 h-12 border-4 border-transparent border-t-gray-900 dark:border-t-white border-r-gray-400 rounded-full"></div>
                         </motion.div>
                     </div>
                 )}
@@ -740,9 +740,9 @@ export default function AskAgentWidget({
                                 }`}>
                                 {/* Avatar */}
                                 <motion.div 
-                                    className={`flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center shadow-lg ${message.role === 'user'
-                                            ? 'bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-orange-500/30'
-                                            : 'bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-blue-500/30'
+                                    className={`flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center shadow-sm ${message.role === 'user'
+                                            ? 'bg-gray-900 text-white'
+                                            : 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-200/70 dark:border-white/10'
                                         }`}
                                     whileHover={{ scale: 1.1, rotate: 5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
@@ -758,8 +758,8 @@ export default function AskAgentWidget({
                                 <div>
                                     <motion.div 
                                         className={`px-4 py-3 rounded-2xl backdrop-blur-sm ${message.role === 'user'
-                                                ? 'bg-gradient-to-br from-orange-500 to-red-500 text-white rounded-tr-sm shadow-lg shadow-orange-500/20'
-                                                : 'bg-white/80 dark:bg-gray-800/80 text-gray-900 dark:text-gray-100 rounded-tl-sm shadow-lg border border-gray-200/50 dark:border-gray-700/50'
+                                                ? 'bg-gray-900 text-white rounded-tr-sm shadow-sm'
+                                                : 'bg-white/90 dark:bg-gray-900/80 text-gray-900 dark:text-gray-100 rounded-tl-sm shadow-sm border border-gray-200/70 dark:border-white/10'
                                             }`}
                                         whileHover={{ scale: 1.01 }}
                                         transition={{ type: "spring", stiffness: 400 }}
@@ -770,7 +770,7 @@ export default function AskAgentWidget({
                                         {message.role === 'assistant' && message.metadata && (
                                             <div className="mt-3 pt-3 border-t border-gray-200/50 dark:border-gray-700/50 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-3">
                                                 {message.metadata.chunksRetrieved !== undefined && (
-                                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-100/80 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full font-medium">
+                                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200 rounded-full font-medium">
                                                         <Sparkles className="h-3 w-3" />
                                                         {message.metadata.chunksRetrieved} sources
                                                     </span>
@@ -802,23 +802,23 @@ export default function AskAgentWidget({
                         exit={{ opacity: 0, y: -20 }}
                     >
                         <div className="flex gap-3 max-w-[80%] md:max-w-[70%]">
-                            <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+                            <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white shadow-sm border border-gray-200/70 dark:border-white/10">
                                 <Bot className="h-4 w-4" />
                             </div>
-                            <div className="px-5 py-4 rounded-2xl rounded-tl-sm bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-gray-700/50">
+                            <div className="px-5 py-4 rounded-2xl rounded-tl-sm bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm border border-gray-200/70 dark:border-white/10">
                                 <div className="flex gap-1.5">
                                     <motion.div 
-                                        className="w-2 h-2 bg-blue-500 rounded-full"
+                                        className="w-2 h-2 bg-gray-900 dark:bg-white rounded-full"
                                         animate={{ y: [0, -8, 0] }}
                                         transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut" }}
                                     />
                                     <motion.div 
-                                        className="w-2 h-2 bg-purple-500 rounded-full"
+                                        className="w-2 h-2 bg-gray-500 dark:bg-gray-300 rounded-full"
                                         animate={{ y: [0, -8, 0] }}
                                         transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
                                     />
                                     <motion.div 
-                                        className="w-2 h-2 bg-pink-500 rounded-full"
+                                        className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"
                                         animate={{ y: [0, -8, 0] }}
                                         transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
                                     />
@@ -832,7 +832,7 @@ export default function AskAgentWidget({
             </div>
 
             {/* Input Area */}
-            <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-t border-gray-200/50 dark:border-gray-800/50 px-4 py-4">
+            <div className="bg-white/90 dark:bg-gray-950/80 backdrop-blur-xl border-t border-gray-200/70 dark:border-white/10 px-4 py-4">
                 <form onSubmit={handleSendMessage} className="flex gap-3">
                     <textarea
                         ref={inputRef}
@@ -846,7 +846,7 @@ export default function AskAgentWidget({
                         }}
                         placeholder={agentId ? "Type a message..." : "Select an agent to start chatting"}
                         rows={1}
-                        className="flex-1 resize-none px-5 py-4 bg-gray-100/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent max-h-32 transition-all"
+                        className="flex-1 resize-none px-5 py-4 bg-gray-100/80 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/70 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 focus:border-transparent max-h-32 transition-all"
                         disabled={sending || !agentId}
                     />
                     <motion.button
@@ -854,7 +854,7 @@ export default function AskAgentWidget({
                         disabled={!inputMessage.trim() || sending || !agentId}
                         whileHover={{ scale: sending || !inputMessage.trim() ? 1 : 1.05 }}
                         whileTap={{ scale: sending || !inputMessage.trim() ? 1 : 0.95 }}
-                        className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 disabled:from-gray-300 disabled:to-gray-400 dark:disabled:from-gray-700 dark:disabled:to-gray-600 text-white rounded-2xl flex items-center justify-center transition-all disabled:cursor-not-allowed shadow-lg shadow-blue-500/30 disabled:shadow-none"
+                        className="flex-shrink-0 w-12 h-12 bg-gray-900 hover:bg-black disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white rounded-2xl flex items-center justify-center transition-all disabled:cursor-not-allowed shadow-sm disabled:shadow-none"
                     >
                         {sending ? (
                             <motion.div

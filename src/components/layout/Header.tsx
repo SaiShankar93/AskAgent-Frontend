@@ -37,32 +37,32 @@ export default function Header() {
             transition={{ duration: 0.5 }}
             className={`fixed top-0 w-full z-50 transition-all duration-300 ${
                 isScrolled
-                    ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg'
-                    : 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-md'
-            } border-b border-gray-200 dark:border-gray-800`}
+                    ? 'bg-white/90 dark:bg-gray-950/85 backdrop-blur-xl shadow-[0_12px_30px_rgba(0,0,0,0.08)]'
+                    : 'bg-white/70 dark:bg-gray-950/60 backdrop-blur-md'
+            } border-b border-gray-200/70 dark:border-white/10`}
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                            <Sparkles className="w-5 h-5 text-white" />
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <div className="w-9 h-9 rounded-xl bg-gray-900 dark:bg-white flex items-center justify-center shadow-sm transition-transform duration-300 group-hover:scale-105">
+                            <Sparkles className="w-4 h-4 text-white dark:text-gray-900" />
                         </div>
-                        <span className="text-2xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
+                        <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                             AskAgent
                         </span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    <nav className="hidden md:flex items-center gap-6">
                         {navLinks.map((link) => (
                             <a
                                 key={link.href}
                                 href={link.href}
-                                className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors duration-200 relative group"
+                                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 relative group"
                             >
                                 {link.label}
-                                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
+                                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gray-900 dark:bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
                             </a>
                         ))}
                     </nav>
@@ -72,7 +72,7 @@ export default function Header() {
                         {/* Theme toggle */}
                         <button
                             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className="p-2.5 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 hover:scale-110"
+                            className="p-2.5 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-200"
                             aria-label="Toggle theme"
                         >
                             {mounted && (
@@ -88,12 +88,12 @@ export default function Header() {
                         <div className="hidden md:flex items-center gap-2">
                             <SignedOut>
                                 <SignInButton mode="modal">
-                                    <button className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
                                         Sign In
                                     </button>
                                 </SignInButton>
                                 <SignUpButton mode="modal">
-                                    <button className="px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
+                                    <button className="px-6 py-2.5 text-sm font-semibold text-white bg-gray-900 hover:bg-black dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 rounded-xl shadow-sm transition-all duration-200">
                                         Get Started
                                     </button>
                                 </SignUpButton>
@@ -114,7 +114,7 @@ export default function Header() {
                         {/* Mobile menu button */}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="md:hidden p-2 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                            className="md:hidden p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-all"
                             aria-label="Toggle menu"
                         >
                             {isMobileMenuOpen ? (
@@ -135,7 +135,7 @@ export default function Header() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900"
+                        className="md:hidden border-t border-gray-200/70 dark:border-white/10 bg-white dark:bg-gray-950"
                     >
                         <div className="container mx-auto px-4 py-4 space-y-3">
                             {navLinks.map((link) => (
@@ -143,21 +143,21 @@ export default function Header() {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl font-medium transition-colors"
+                                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl font-medium transition-colors"
                                 >
                                     {link.label}
                                 </a>
                             ))}
                             
                             <SignedOut>
-                                <div className="pt-3 border-t border-gray-200 dark:border-gray-800 space-y-2">
+                                <div className="pt-3 border-t border-gray-200 dark:border-white/10 space-y-2">
                                     <SignInButton mode="modal">
-                                        <button className="w-full px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors">
+                                        <button className="w-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-colors">
                                             Sign In
                                         </button>
                                     </SignInButton>
                                     <SignUpButton mode="modal">
-                                        <button className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl shadow-lg">
+                                        <button className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-gray-900 dark:bg-white dark:text-gray-900 rounded-xl shadow-sm">
                                             Get Started
                                         </button>
                                     </SignUpButton>
