@@ -13,6 +13,7 @@ interface AgentSidebarProps {
   onAddAgent: () => void;
   isMobileOpen: boolean;
   onCloseMobile: () => void;
+  refreshKey?: number;
 }
 
 export default function AgentSidebar({
@@ -21,6 +22,7 @@ export default function AgentSidebar({
   onAddAgent,
   isMobileOpen,
   onCloseMobile,
+  refreshKey = 0,
 }: AgentSidebarProps) {
   const { fetchAgents, deleteAgent, loading } = useAgents();
   const { theme, setTheme } = useTheme();
@@ -31,7 +33,7 @@ export default function AgentSidebar({
 
   useEffect(() => {
     loadAgents();
-  }, []);
+  }, [refreshKey]);
 
   const loadAgents = async () => {
     try {

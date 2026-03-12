@@ -238,7 +238,7 @@ export default function Hero() {
                   className="flex justify-start"
                 >
                   <div className="max-w-[85%] rounded-2xl rounded-tl-md border border-gray-100 bg-gray-50 px-4 py-3 text-sm text-gray-800 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-gray-200">
-                    Based on your content, we offer comprehensive web development, AI integration, and
+                    We offer comprehensive web development, AI integration, and
                     custom software solutions. Would you like to know more about any specific service?
                   </div>
                 </motion.div>
@@ -287,7 +287,7 @@ export default function Hero() {
                 className="flex items-center gap-2 rounded-full border border-white/50 bg-white/90 px-4 py-2 text-sm font-semibold text-gray-900 shadow-xl backdrop-blur-md dark:border-white/10 dark:bg-gray-800/90 dark:text-white"
               >
                 <Zap className="h-3.5 w-3.5 text-amber-500" />
-                Real-time Responses
+                AI Assistant for your website
               </motion.div>
             </motion.div>
 

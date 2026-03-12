@@ -1,6 +1,6 @@
 'use client';
 
-import { Globe, FileText, Bot, MessageSquare, ChevronRight } from 'lucide-react';
+import { Globe, FileText, Bot, MessageSquare, Code2, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { type LucideIcon } from 'lucide-react';
 
@@ -24,15 +24,6 @@ const steps: Step[] = [
     glowColor: 'group-hover:shadow-indigo-500/20',
   },
   {
-    icon: FileText,
-    title: 'Or Upload Documents',
-    description:
-      'Upload PDFs, Word documents, or plain text files. Our pipeline intelligently chunks and processes your content for optimal retrieval accuracy.',
-    iconGradient: 'from-violet-500 to-purple-500',
-    badgeColor: 'bg-violet-500',
-    glowColor: 'group-hover:shadow-violet-500/20',
-  },
-  {
     icon: Bot,
     title: 'AI Processes & Embeds',
     description:
@@ -45,10 +36,19 @@ const steps: Step[] = [
     icon: MessageSquare,
     title: 'Chat with Your Data',
     description:
-      'Ask natural language questions and receive accurate, context-aware answers powered by RAG — grounded in your data, not hallucinations.',
+      'Ask questions and receive accurate, context-aware answers powered by RAG — grounded in your data, not hallucinations.',
     iconGradient: 'from-amber-500 to-orange-500',
     badgeColor: 'bg-amber-500',
     glowColor: 'group-hover:shadow-amber-500/20',
+  },
+  {
+    icon: Code2,
+    title: 'Embed in Your Website',
+    description:
+      'The Chatbot can be easily configured and embedded in your website. Visitors get an instant AI chat widget powered by all your website content — no backend work needed.',
+    iconGradient: 'from-teal-500 to-cyan-500',
+    badgeColor: 'bg-teal-500',
+    glowColor: 'group-hover:shadow-teal-500/20',
   },
 ];
 

@@ -3,14 +3,16 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Send, Bot, User, Loader2, AlertCircle, Sparkles, Code, X, Copy, Check, Trash2 } from 'lucide-react';
+import { Send, Bot, User, Loader2, AlertCircle, Sparkles, Code, X, Copy, Check, Trash2, Plus, Upload, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useChat } from '@/hooks/useChat';
+import { useAgents } from '@/hooks/useAgents';
 import { getEmbedCode as getEmbedCodeTemplate, Framework } from './embedCodeTemplates';
 
 interface ChatPanelProps {
     agentId: string | null;
     agentName?: string;
+    agentType?: 'website' | 'document';
     onDeleteAgent?: () => Promise<void>;
 }
 
@@ -36,15 +38,20 @@ const featureItems = [
     { icon: Bot, label: 'AI Chat', gradient: 'from-amber-500 to-orange-500', shadow: 'shadow-amber-500/25' },
 ];
 
-export default function ChatPanel({ agentId, agentName, onDeleteAgent }: ChatPanelProps) {
+export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent }: ChatPanelProps) {
     const [inputMessage, setInputMessage] = useState('');
     const [showEmbedModal, setShowEmbedModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showAddContextModal, setShowAddContextModal] = useState(false);
+    const [addContextFile, setAddContextFile] = useState<File | null>(null);
+    const [addContextStatus, setAddContextStatus] = useState<'idle' | 'uploading' | 'done' | 'error'>('idle');
     const [isDeleting, setIsDeleting] = useState(false);
     const [selectedFramework, setSelectedFramework] = useState<Framework>('react');
     const [copiedCode, setCopiedCode] = useState(false);
+    const addContextInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
+    const { addContext } = useAgents();
 
     const { messages, loading, sending, error, fetchHistory, sendMessage } = useChat(agentId);
 
@@ -207,13 +214,24 @@ export default function ChatPanel({ agentId, agentName, onDeleteAgent }: ChatPan
                     </div>
                 </div>
 
-                {/* Embed Button */}
+                {/* Embed Button — only for website agents */}
+                {agentType !== 'document' && (
                 <button
                     onClick={() => setShowEmbedModal(true)}
                     className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 text-white text-sm font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 active:scale-[0.97]"
                 >
                     <Code className="w-4 h-4" />
                     <span>Embed</span>
+                </button>
+                )}
+
+                {/* Add Context Button */}
+                <button
+                    onClick={() => { setAddContextFile(null); setAddContextStatus('idle'); setShowAddContextModal(true); }}
+                    className="flex items-center gap-2 px-3 py-2.5 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-600 dark:text-emerald-400 hover:text-white text-sm font-semibold rounded-xl transition-all duration-200 active:scale-[0.97]"
+                    title="Add more context / documents"
+                >
+                    <Plus className="w-4 h-4" />
                 </button>
 
                 {/* Delete Button */}
@@ -292,6 +310,62 @@ export default function ChatPanel({ agentId, agentName, onDeleteAgent }: ChatPan
                                     </button>
                                 </div>
                             </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* ── Add Context Modal ────────────────────────────────── */}
+            <AnimatePresence>
+                {showAddContextModal && (
+                    <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <motion.div className="absolute inset-0 bg-black/50 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowAddContextModal(false)} />
+                        <motion.div
+                            className="relative bg-white dark:bg-gray-900 rounded-2xl p-8 max-w-sm w-full shadow-2xl border border-gray-200/50 dark:border-gray-700/50"
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+                        >
+                            <button onClick={() => setShowAddContextModal(false)} className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"><X className="w-4 h-4 text-gray-400" /></button>
+                            <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                                <Upload className="h-7 w-7 text-emerald-500" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 text-center">Add More Context</h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center leading-relaxed">Upload a PDF or Word document to expand <strong className="text-gray-700 dark:text-gray-300">{agentName}</strong>'s knowledge base.</p>
+
+                            {addContextStatus === 'done' ? (
+                                <div className="text-center py-4">
+                                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-3"><Check className="h-6 w-6 text-emerald-500" /></div>
+                                    <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Processing in background!</p>
+                                    <p className="text-xs text-gray-400 mt-1">The document will be indexed within a minute.</p>
+                                    <button onClick={() => setShowAddContextModal(false)} className="mt-4 px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-xl transition-colors">Done</button>
+                                </div>
+                            ) : (
+                                <>
+                                    <input ref={addContextInputRef} type="file" accept=".pdf,.doc,.docx,.txt" className="hidden" onChange={e => setAddContextFile(e.target.files?.[0] ?? null)} />
+                                    <button onClick={() => addContextInputRef.current?.click()} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-dashed transition-colors ${addContextFile ? 'border-emerald-400 bg-emerald-50 dark:bg-emerald-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-emerald-400 bg-gray-50 dark:bg-gray-800/50'}`}>
+                                        <FileText className={`w-5 h-5 flex-shrink-0 ${addContextFile ? 'text-emerald-500' : 'text-gray-400'}`} />
+                                        <span className={`text-sm truncate ${addContextFile ? 'text-emerald-700 dark:text-emerald-300 font-medium' : 'text-gray-400'}`}>{addContextFile ? addContextFile.name : 'Click to choose PDF / DOCX / TXT'}</span>
+                                    </button>
+                                    {addContextStatus === 'error' && <p className="text-xs text-red-500 mt-2 text-center">Upload failed. Please try again.</p>}
+                                    <div className="flex gap-3 mt-5">
+                                        <button onClick={() => setShowAddContextModal(false)} className="flex-1 px-4 py-2.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm">Cancel</button>
+                                        <button
+                                            disabled={!addContextFile || addContextStatus === 'uploading'}
+                                            onClick={async () => {
+                                                if (!addContextFile || !agentId) return;
+                                                setAddContextStatus('uploading');
+                                                try {
+                                                    await addContext(agentId, addContextFile);
+                                                    setAddContextStatus('done');
+                                                } catch { setAddContextStatus('error'); }
+                                            }}
+                                            className="flex-1 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2"
+                                        >
+                                            {addContextStatus === 'uploading' ? <><Loader2 className="h-4 w-4 animate-spin" />Uploading...</> : 'Upload'}
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                         </motion.div>
                     </motion.div>
                 )}

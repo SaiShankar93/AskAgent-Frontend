@@ -1,9 +1,9 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import AgentSidebar from "@/components/dashboard/AgentSidebar";
 import ChatPanel from "@/components/dashboard/ChatPanel";
 import { useAgents, Agent } from "@/hooks/useAgents";
@@ -17,6 +17,29 @@ export default function DashboardPage() {
     const [agents, setAgents] = useState<Agent[]>([]);
     const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
     const [isAddAgentModalOpen, setIsAddAgentModalOpen] = useState(false);
+    const [creationBanner, setCreationBanner] = useState(false);
+    const [sidebarRefreshKey, setSidebarRefreshKey] = useState(0);
+    const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    const stopPolling = useCallback(() => {
+        if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
+    }, []);
+
+    const startPolling = useCallback(() => {
+        stopPolling();
+        let attempts = 0;
+        pollingRef.current = setInterval(async () => {
+            attempts++;
+            try {
+                const fetched = await fetchAgents();
+                setAgents(fetched);
+                setSidebarRefreshKey(k => k + 1);
+                if (attempts >= 12) stopPolling();
+            } catch { /* ignore */ }
+        }, 5000);
+    }, [fetchAgents, stopPolling]);
+
+    useEffect(() => () => stopPolling(), [stopPolling]);
 
     // Load agents on mount
     useEffect(() => {
@@ -52,7 +75,11 @@ export default function DashboardPage() {
     };
 
     const handleModalSuccess = () => {
-        loadAgents(); // Refresh agents list
+        loadAgents();
+        setCreationBanner(true);
+        startPolling();
+        setSidebarRefreshKey(k => k + 1);
+        setTimeout(() => setCreationBanner(false), 8000);
     };
 
     const handleDeleteAgent = async (agentId: string) => {
@@ -60,6 +87,7 @@ export default function DashboardPage() {
             await deleteAgent(agentId);
             // Remove from local state
             setAgents(prev => prev.filter(a => a.id !== agentId));
+            setSidebarRefreshKey(k => k + 1);
             // Deselect if this was the selected agent
             if (selectedAgentId === agentId) {
                 setSelectedAgentId(null);
@@ -67,7 +95,7 @@ export default function DashboardPage() {
             }
         } catch (error) {
             console.error('Failed to delete agent:', error);
-            throw error; // Re-throw so the modal can handle it
+            throw error;
         }
     };
 
@@ -239,6 +267,7 @@ export default function DashboardPage() {
                     onAddAgent={handleAddAgent}
                     isMobileOpen={isMobileSidebarOpen}
                     onCloseMobile={() => setIsMobileSidebarOpen(false)}
+                    refreshKey={sidebarRefreshKey}
                 />
             </aside>
 
@@ -254,11 +283,27 @@ export default function DashboardPage() {
                 />
             )}
 
+            {/* Creation Banner */}
+            <AnimatePresence>
+                {creationBanner && (
+                    <motion.div
+                        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-3.5 bg-emerald-600 text-white rounded-2xl shadow-xl text-sm font-semibold"
+                        initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }}
+                        transition={{ type: 'spring', damping: 22, stiffness: 300 }}
+                    >
+                        <span className="relative flex h-2.5 w-2.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" /><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white" /></span>
+                        Your agent is being created — it will appear in the sidebar within 1 minute.
+                        <button onClick={() => setCreationBanner(false)} className="ml-1 opacity-70 hover:opacity-100 transition-opacity"><X className="w-4 h-4" /></button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Right Panel - Chat Interface */}
             <main className="flex-1 flex flex-col bg-transparent pt-[52px] lg:pt-0 relative z-0 min-w-0">
                 <ChatPanel
                     agentId={selectedAgentId}
                     agentName={selectedAgent?.name}
+                    agentType={selectedAgent?.type}
                     onDeleteAgent={selectedAgentId ? () => handleDeleteAgent(selectedAgentId) : undefined}
                 />
             </main>

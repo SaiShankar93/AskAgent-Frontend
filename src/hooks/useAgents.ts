@@ -166,11 +166,39 @@ export const useAgents = () => {
         }
     };
 
+    const addContext = async (agentId: string, file: File): Promise<CreateAgentResponse> => {
+        setLoading(true);
+        setError(null);
+        try {
+            const token = await getToken();
+            const formData = new FormData();
+            formData.append('document', file);
+            const response = await fetch(`${API_BASE_URL}/agents/${agentId}/add-context`, {
+                method: 'POST',
+                headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+                body: formData,
+            });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error || `Failed: ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'Failed to add context';
+            setError(errorMessage);
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return {
         uploadDocument,
         scrapeWebsite,
         fetchAgents,
         deleteAgent,
+        addContext,
         loading,
         error,
     };

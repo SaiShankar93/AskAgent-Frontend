@@ -49,7 +49,7 @@ interface SocialLink {
 const socialLinks: SocialLink[] = [
     { icon: Github, href: 'https://github.com/SaiShankar93', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/sai-shankar-punna/', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:contact@saishankar.tech', label: 'Email' },
+    { icon: Mail, href: 'mailto:saishankarpunna@gmail.com', label: 'Email' },
 ];
 
 export default function Footer() {
