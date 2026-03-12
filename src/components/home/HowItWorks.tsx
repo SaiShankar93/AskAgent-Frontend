@@ -1,152 +1,248 @@
-"use client";
+'use client';
 
-import { Globe, FileText, Bot, MessageSquare } from "lucide-react";
-import { motion } from "framer-motion";
+import { Globe, FileText, Bot, MessageSquare, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { type LucideIcon } from 'lucide-react';
 
-const steps = [
-	{
-		icon: Globe,
-		title: "Enter Website URL",
-		description:
-			"Simply paste your website URL. Our Website crawler will automatically extract and index all your content with smart filtering.",
-		color: "from-blue-500 to-cyan-500",
-		bgColor: "bg-blue-500/10",
-		borderColor: "border-blue-500/20",
-		iconBg: "bg-gradient-to-br from-blue-500 to-cyan-500"
-	},
-	{
-		icon: FileText,
-		title: "Or Upload Documents",
-		description:
-			"Upload PDFs, Word documents, or text files. We process and chunk your content using LangChain for optimal retrieval.",
-		color: "from-purple-500 to-pink-500",
-		bgColor: "bg-purple-500/10",
-		borderColor: "border-purple-500/20",
-		iconBg: "bg-gradient-to-br from-purple-500 to-pink-500"
-	},
-	{
-		icon: Bot,
-		title: "AI Processes & Embeds",
-		description:
-			"OpenAI generates embeddings and stores them in Qdrant vector database. Your knowledge base is now ready for intelligent retrieval.",
-		color: "from-orange-500 to-red-500",
-		bgColor: "bg-orange-500/10",
-		borderColor: "border-orange-500/20",
-		iconBg: "bg-gradient-to-br from-orange-500 to-red-500"
-	},
-	{
-		icon: MessageSquare,
-		title: "Chat with Your Data",
-		description:
-			"Ask questions and get accurate answers powered by RAG (Retrieval-Augmented Generation) with context-aware responses.",
-		color: "from-green-500 to-emerald-500",
-		bgColor: "bg-green-500/10",
-		borderColor: "border-green-500/20",
-		iconBg: "bg-gradient-to-br from-green-500 to-emerald-500"
-	}
+interface Step {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  iconGradient: string;
+  badgeColor: string;
+  glowColor: string;
+}
+
+const steps: Step[] = [
+  {
+    icon: Globe,
+    title: 'Enter Website URL',
+    description:
+      'Paste any website URL and our intelligent crawler automatically extracts, filters, and indexes all relevant content — no manual setup required.',
+    iconGradient: 'from-indigo-500 to-violet-500',
+    badgeColor: 'bg-indigo-500',
+    glowColor: 'group-hover:shadow-indigo-500/20',
+  },
+  {
+    icon: FileText,
+    title: 'Or Upload Documents',
+    description:
+      'Upload PDFs, Word documents, or plain text files. Our pipeline intelligently chunks and processes your content for optimal retrieval accuracy.',
+    iconGradient: 'from-violet-500 to-purple-500',
+    badgeColor: 'bg-violet-500',
+    glowColor: 'group-hover:shadow-violet-500/20',
+  },
+  {
+    icon: Bot,
+    title: 'AI Processes & Embeds',
+    description:
+      'OpenAI generates high-dimensional embeddings that capture semantic meaning, stored in Qdrant vector database for lightning-fast similarity search.',
+    iconGradient: 'from-purple-500 to-fuchsia-500',
+    badgeColor: 'bg-purple-500',
+    glowColor: 'group-hover:shadow-purple-500/20',
+  },
+  {
+    icon: MessageSquare,
+    title: 'Chat with Your Data',
+    description:
+      'Ask natural language questions and receive accurate, context-aware answers powered by RAG — grounded in your data, not hallucinations.',
+    iconGradient: 'from-amber-500 to-orange-500',
+    badgeColor: 'bg-amber-500',
+    glowColor: 'group-hover:shadow-amber-500/20',
+  },
 ];
 
+const techStack = [
+  { name: 'LangChain', color: 'text-indigo-600 dark:text-indigo-400' },
+  { name: 'OpenAI', color: 'text-violet-600 dark:text-violet-400' },
+  { name: 'Qdrant', color: 'text-purple-600 dark:text-purple-400' },
+  { name: 'MongoDB', color: 'text-amber-600 dark:text-amber-400' },
+];
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function HowItWorks() {
-	return (
-		<section id="how-it-works" className="py-24 relative overflow-hidden">
-			{/* Background effects */}
-			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/5 to-transparent" />
-			<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
-			<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl" />
+  return (
+    <section id="how-it-works" className="py-28 lg:py-36 relative overflow-hidden">
+      {/* Background layers */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50/80 via-white to-gray-50/80 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-20%,rgba(120,80,220,0.08),transparent)] dark:bg-[radial-gradient(ellipse_60%_50%_at_50%_-20%,rgba(120,80,220,0.15),transparent)]" />
 
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-				{/* Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5 }}
-					className="text-center max-w-3xl mx-auto mb-20"
-				>
-					<h2 className="text-4xl md:text-5xl font-bold mb-6">
-						<span className="bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
-							How It Works
-						</span>
-					</h2>
-					<p className="text-xl text-gray-600 dark:text-gray-400">
-						Transform your content into an intelligent AI assistant in minutes
-					</p>
-				</motion.div>
+      {/* Subtle floating orbs */}
+      <div className="absolute top-1/4 left-[15%] w-72 h-72 bg-indigo-400/8 dark:bg-indigo-500/10 rounded-full blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-1/4 right-[15%] w-72 h-72 bg-violet-400/8 dark:bg-violet-500/10 rounded-full blur-3xl animate-pulse-slow" />
 
-				{/* Steps Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-					{steps.map((step, index) => (
-						<motion.div
-							key={index}
-							initial={{ opacity: 0, y: 30 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ duration: 0.5, delay: index * 0.1 }}
-							className="relative"
-						>
-							{/* Card */}
-							<div
-								className={`h-full ${step.bgColor} backdrop-blur-sm rounded-2xl p-6 border ${step.borderColor} hover:border-opacity-50 transition-all duration-300 hover:shadow-xl hover:scale-105 group`}
-							>
-								{/* Step number */}
-								<div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center text-white font-bold text-lg shadow-lg border-4 border-white dark:border-gray-950">
-									{index + 1}
-								</div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-20"
+        >
+          <p className="text-sm font-semibold uppercase tracking-widest text-indigo-500 dark:text-indigo-400 mb-4">
+            Simple 4-Step Process
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 dark:from-indigo-400 dark:via-violet-400 dark:to-purple-400 bg-clip-text text-transparent">
+              How It Works
+            </span>
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            Transform your content into an intelligent AI assistant in minutes — no coding, no complexity.
+          </p>
+        </motion.div>
 
-								{/* Icon */}
-								<div
-									className={`w-16 h-16 ${step.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-								>
-									<step.icon className="w-8 h-8 text-white" />
-								</div>
+        {/* Steps grid with connector */}
+        <div className="relative">
+          {/* Desktop connector line */}
+          <div className="hidden lg:block absolute top-[72px] left-[calc(12.5%+28px)] right-[calc(12.5%+28px)] h-px">
+            <div className="w-full h-full bg-gradient-to-r from-indigo-300 via-violet-300 to-amber-300 dark:from-indigo-600 dark:via-violet-600 dark:to-amber-600 opacity-40" />
+            {/* Animated pulse along the line */}
+            <motion.div
+              className="absolute top-0 left-0 h-full w-1/4 bg-gradient-to-r from-transparent via-indigo-400 dark:via-indigo-400 to-transparent opacity-60"
+              animate={{ left: ['0%', '75%', '0%'] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </div>
 
-								{/* Content */}
-								<h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-									{step.title}
-								</h3>
-								<p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-									{step.description}
-								</p>
+          {/* Desktop connector arrows between cards */}
+          {[0, 1, 2].map((i) => (
+            <div
+              key={`arrow-${i}`}
+              className="hidden lg:flex absolute top-[60px] items-center justify-center z-10"
+              style={{
+                left: `${25 * (i + 1)}%`,
+                transform: 'translateX(-50%)',
+              }}
+            >
+              <div className="w-8 h-8 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm flex items-center justify-center">
+                <ChevronRight className="w-4 h-4 text-violet-500 dark:text-violet-400" />
+              </div>
+            </div>
+          ))}
 
-								{/* Hover effect glow */}
-								<div
-									className={`absolute inset-0 ${step.iconBg} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300 pointer-events-none`}
-								/>
-							</div>
-						</motion.div>
-					))}
-				</div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5"
+          >
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                className="relative group"
+              >
+                <div
+                  className={`
+                    relative h-full rounded-2xl p-6 pt-8
+                    bg-white/70 dark:bg-white/[0.04]
+                    backdrop-blur-xl
+                    border border-gray-200/80 dark:border-white/[0.06]
+                    shadow-sm ${step.glowColor}
+                    hover:shadow-xl hover:-translate-y-1.5
+                    transition-all duration-500 ease-out
+                  `}
+                >
+                  {/* Glassmorphic inner highlight */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/50 via-transparent to-transparent dark:from-white/[0.03] dark:via-transparent pointer-events-none" />
 
-				{/* Tech Stack Badge */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5, delay: 0.4 }}
-					className="mt-16 text-center"
-				>
-					<div className="inline-flex flex-wrap items-center justify-center gap-3 px-6 py-3 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700">
-						<span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-							Powered by:
-						</span>
-						<span className="text-sm font-semibold text-primary-600 dark:text-primary-400">
-							Langchain
-						</span>
-						<span className="text-gray-400">•</span>
-						<span className="text-sm font-semibold text-secondary-600 dark:text-secondary-400">
-							OpenAI
-						</span>
-						<span className="text-gray-400">•</span>
-						<span className="text-sm font-semibold text-accent-600 dark:text-accent-400">
-							Qdrant
-						</span>
-						<span className="text-gray-400">•</span>
-						<span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
-							MongoDB
-						</span>
-					</div>
-				</motion.div>
-			</div>
-		</section>
-	);
+                  {/* Step number badge */}
+                  <div
+                    className={`
+                      absolute -top-3.5 left-5
+                      w-7 h-7 rounded-full ${step.badgeColor}
+                      flex items-center justify-center
+                      text-xs font-bold text-white
+                      shadow-lg ring-4 ring-white dark:ring-gray-900
+                    `}
+                  >
+                    {index + 1}
+                  </div>
+
+                  {/* Icon container */}
+                  <div
+                    className={`
+                      relative w-14 h-14 rounded-xl mb-5
+                      bg-gradient-to-br ${step.iconGradient}
+                      flex items-center justify-center
+                      shadow-lg
+                      group-hover:scale-110 group-hover:rotate-[-2deg]
+                      transition-transform duration-500 ease-out
+                    `}
+                  >
+                    <step.icon className="w-7 h-7 text-white" strokeWidth={1.75} />
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="relative text-lg font-bold mb-2.5 text-gray-900 dark:text-white">
+                    {step.title}
+                  </h3>
+                  <p className="relative text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Tech stack badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-20 flex justify-center"
+        >
+          <div
+            className="
+              inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2
+              px-6 py-3 rounded-full
+              bg-white/60 dark:bg-white/[0.04]
+              backdrop-blur-lg
+              border border-gray-200/80 dark:border-white/[0.06]
+              shadow-sm
+            "
+          >
+            <span className="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-500">
+              Powered by
+            </span>
+            {techStack.map((tech, index) => (
+              <span key={tech.name} className="flex items-center gap-x-3">
+                {index > 0 && (
+                  <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+                )}
+                <span className={`text-sm font-semibold ${tech.color}`}>
+                  {tech.name}
+                </span>
+              </span>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 }

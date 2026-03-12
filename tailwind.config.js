@@ -1,127 +1,201 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-        './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-        './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    ],
-    darkMode: 'class',
-    theme: {
-        extend: {
-            colors: {
-                primary: {
-                    50: '#f0f9ff',
-                    100: '#e0f2fe',
-                    200: '#bae6fd',
-                    300: '#7dd3fc',
-                    400: '#38bdf8',
-                    500: '#0ea5e9',
-                    600: '#0284c7',
-                    700: '#0369a1',
-                    800: '#075985',
-                    900: '#0c4a6e',
-                    950: '#082f49',
-                },
-                secondary: {
-                    50: '#fdf4ff',
-                    100: '#fae8ff',
-                    200: '#f5d0fe',
-                    300: '#f0abfc',
-                    400: '#e879f9',
-                    500: '#d946ef',
-                    600: '#c026d3',
-                    700: '#a21caf',
-                    800: '#86198f',
-                    900: '#701a75',
-                    950: '#4a044e',
-                },
-                accent: {
-                    50: '#ecfdf5',
-                    100: '#d1fae5',
-                    200: '#a7f3d0',
-                    300: '#6ee7b7',
-                    400: '#34d399',
-                    500: '#10b981',
-                    600: '#059669',
-                    700: '#047857',
-                    800: '#065f46',
-                    900: '#064e3b',
-                    950: '#022c22',
-                },
-                dark: {
-                    100: '#181818',
-                    200: '#121212',
-                    300: '#0e0e0e',
-                    400: '#0a0a0a',
-                    500: '#050505',
-                    900: '#000000',
-                },
-            },
-            fontFamily: {
-                sans: ['var(--font-geist-sans)'],
-                mono: ['var(--font-geist-mono)'],
-            },
-            backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-                'grid-pattern': 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'%3E%3Cg fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.05\'%3E%3Cpath opacity=\'.5\' d=\'M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-                'circuit-pattern': 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 304 304\' width=\'304\' height=\'304\'%3E%3Cpath fill=\'%23a0aec0\' fill-opacity=\'0.1\' d=\'M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 217.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z\'%3E%3C/path%3E%3C/svg%3E")',
-            },
-            boxShadow: {
-                'neon': '0 0 5px theme("colors.primary.400"), 0 0 20px theme("colors.primary.500")',
-                'neon-lg': '0 0 10px theme("colors.primary.400"), 0 0 30px theme("colors.primary.500"), 0 0 50px theme("colors.primary.600")',
-                'neon-xl': '0 0 15px theme("colors.primary.400"), 0 0 40px theme("colors.primary.500"), 0 0 60px theme("colors.primary.600"), 0 0 80px theme("colors.primary.700")',
-                'neon-accent': '0 0 5px theme("colors.accent.400"), 0 0 20px theme("colors.accent.500")',
-                'code': '0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.1)',
-                'code-dark': '0 0 0 1px rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.3)',
-            },
-            animation: {
-                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                'float': 'float 6s ease-in-out infinite',
-                'glow': 'glow 2s ease-in-out infinite alternate',
-                'gradient': 'gradient 8s ease infinite',
-                'type': 'type 2.7s ease-out .8s infinite alternate both',
-                'wave': 'wave 2.5s ease-in-out infinite',
-            },
-            keyframes: {
-                float: {
-                    '0%, 100%': { transform: 'translateY(0)' },
-                    '50%': { transform: 'translateY(-10px)' },
-                },
-                glow: {
-                    '0%': { boxShadow: '0 0 5px rgba(66, 153, 225, 0.5), 0 0 10px rgba(66, 153, 225, 0.3)' },
-                    '100%': { boxShadow: '0 0 10px rgba(66, 153, 225, 0.7), 0 0 20px rgba(66, 153, 225, 0.5), 0 0 30px rgba(66, 153, 225, 0.3)' },
-                },
-                gradient: {
-                    '0%': { backgroundPosition: '0% 50%' },
-                    '50%': { backgroundPosition: '100% 50%' },
-                    '100%': { backgroundPosition: '0% 50%' },
-                },
-                type: {
-                    '0%': { width: '0ch' },
-                    '5%, 10%': { width: '1ch' },
-                    '15%, 20%': { width: '2ch' },
-                    '25%, 30%': { width: '3ch' },
-                    '35%, 40%': { width: '4ch' },
-                    '45%, 50%': { width: '5ch' },
-                    '55%, 60%': { width: '6ch' },
-                    '65%, 70%': { width: '7ch' },
-                    '75%, 80%': { width: '8ch' },
-                    '85%, 90%': { width: '9ch' },
-                    '95%': { width: '10ch' },
-                },
-                wave: {
-                    '0%': { transform: 'rotate(0.0deg)' },
-                    '10%': { transform: 'rotate(14.0deg)' },
-                    '20%': { transform: 'rotate(-8.0deg)' },
-                    '30%': { transform: 'rotate(14.0deg)' },
-                    '40%': { transform: 'rotate(-4.0deg)' },
-                    '50%': { transform: 'rotate(10.0deg)' },
-                    '60%': { transform: 'rotate(0.0deg)' },
-                    '100%': { transform: 'rotate(0.0deg)' },
-                },
-            },
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      /* ----------------------------------------------------------------
+         Colors — indigo-violet primary, warm amber accent
+         ---------------------------------------------------------------- */
+      colors: {
+        primary: {
+          50:  '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
         },
+        accent: {
+          50:  '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
+          950: '#451a03',
+        },
+        surface: {
+          DEFAULT: 'var(--color-surface)',
+          raised:  'var(--color-surface-raised)',
+          overlay: 'var(--color-surface-overlay)',
+        },
+        border: {
+          DEFAULT: 'var(--color-border)',
+          subtle:  'var(--color-border-subtle)',
+        },
+        dark: {
+          50:  '#1c1d3a',
+          100: '#16172e',
+          200: '#111227',
+          300: '#0c0d1a',
+          400: '#090a14',
+          500: '#06060f',
+          900: '#020204',
+        },
+      },
+
+      /* ----------------------------------------------------------------
+         Typography — Geist font variables
+         ---------------------------------------------------------------- */
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+
+      /* ----------------------------------------------------------------
+         Spacing extensions
+         ---------------------------------------------------------------- */
+      spacing: {
+        '4.5': '1.125rem',
+        '13':  '3.25rem',
+        '15':  '3.75rem',
+        '18':  '4.5rem',
+        '22':  '5.5rem',
+        '30':  '7.5rem',
+        '34':  '8.5rem',
+        '68':  '17rem',
+        '76':  '19rem',
+        '84':  '21rem',
+        '88':  '22rem',
+        '92':  '23rem',
+        '100': '25rem',
+        '120': '30rem',
+        '144': '36rem',
+      },
+
+      /* ----------------------------------------------------------------
+         Border Radius
+         ---------------------------------------------------------------- */
+      borderRadius: {
+        '4xl': '2rem',
+        '5xl': '2.5rem',
+      },
+
+      /* ----------------------------------------------------------------
+         Backdrop Blur
+         ---------------------------------------------------------------- */
+      backdropBlur: {
+        xs:   '2px',
+        '2xl': '40px',
+        '3xl': '64px',
+      },
+
+      /* ----------------------------------------------------------------
+         Box Shadows — premium layered shadows
+         ---------------------------------------------------------------- */
+      boxShadow: {
+        'soft-xs':   '0 1px 2px hsl(var(--shadow-color) / 0.04)',
+        'soft-sm':   '0 1px 3px hsl(var(--shadow-color) / 0.06), 0 1px 2px hsl(var(--shadow-color) / 0.04)',
+        'soft':      '0 2px 8px hsl(var(--shadow-color) / 0.06), 0 1px 3px hsl(var(--shadow-color) / 0.04)',
+        'soft-md':   '0 4px 16px hsl(var(--shadow-color) / 0.08), 0 2px 4px hsl(var(--shadow-color) / 0.04)',
+        'soft-lg':   '0 8px 30px hsl(var(--shadow-color) / 0.10), 0 4px 8px hsl(var(--shadow-color) / 0.04)',
+        'soft-xl':   '0 16px 48px hsl(var(--shadow-color) / 0.12), 0 6px 16px hsl(var(--shadow-color) / 0.06)',
+        'soft-2xl':  '0 24px 64px hsl(var(--shadow-color) / 0.16), 0 8px 20px hsl(var(--shadow-color) / 0.08)',
+        'glow-sm':   '0 0 8px rgba(99, 102, 241, 0.25), 0 0 16px rgba(99, 102, 241, 0.10)',
+        'glow':      '0 0 12px rgba(99, 102, 241, 0.30), 0 0 32px rgba(99, 102, 241, 0.15)',
+        'glow-lg':   '0 0 20px rgba(99, 102, 241, 0.35), 0 0 48px rgba(99, 102, 241, 0.18), 0 0 72px rgba(99, 102, 241, 0.08)',
+        'glow-accent': '0 0 12px rgba(245, 158, 11, 0.30), 0 0 32px rgba(245, 158, 11, 0.15)',
+        'inner-glow': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.06)',
+      },
+
+      /* ----------------------------------------------------------------
+         Background Images — CSS-based only (no massive SVGs)
+         ---------------------------------------------------------------- */
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':  'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-mesh':   'linear-gradient(-45deg, #6366f1, #8b5cf6, #7c3aed, #4f46e5)',
+      },
+
+      /* ----------------------------------------------------------------
+         Animations
+         ---------------------------------------------------------------- */
+      animation: {
+        'float':       'float 6s ease-in-out infinite',
+        'glow':        'glow 2.4s ease-in-out infinite alternate',
+        'shimmer':     'shimmer 1.8s ease-in-out infinite',
+        'aurora':      'aurora 12s ease infinite',
+        'slideUp':     'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+        'slideDown':   'slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+        'scaleIn':     'scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+        'fadeIn':      'fadeIn 0.35s ease-out',
+        'pulse-glow':  'pulseGlow 3s ease-in-out infinite',
+        'pulse-slow':  'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient':    'aurora 8s ease infinite',
+        'mesh-rotate': 'meshRotate 20s linear infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%':      { transform: 'translateY(-12px)' },
+        },
+        glow: {
+          '0%':   { boxShadow: '0 0 6px rgba(99,102,241,0.15), 0 0 20px rgba(99,102,241,0.08)' },
+          '100%': { boxShadow: '0 0 14px rgba(99,102,241,0.40), 0 0 40px rgba(99,102,241,0.15)' },
+        },
+        shimmer: {
+          '0%':   { backgroundPosition: '-500px 0' },
+          '100%': { backgroundPosition: '500px 0' },
+        },
+        aurora: {
+          '0%':   { backgroundPosition: '0% 50%',   backgroundSize: '200% 200%' },
+          '25%':  { backgroundPosition: '50% 0%',   backgroundSize: '250% 250%' },
+          '50%':  { backgroundPosition: '100% 50%', backgroundSize: '200% 200%' },
+          '75%':  { backgroundPosition: '50% 100%', backgroundSize: '250% 250%' },
+          '100%': { backgroundPosition: '0% 50%',   backgroundSize: '200% 200%' },
+        },
+        slideUp: {
+          from: { opacity: '0', transform: 'translateY(24px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideDown: {
+          from: { opacity: '0', transform: 'translateY(-24px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          from: { opacity: '0', transform: 'scale(0.92)' },
+          to:   { opacity: '1', transform: 'scale(1)' },
+        },
+        fadeIn: {
+          from: { opacity: '0', transform: 'translateY(8px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
+        },
+        pulseGlow: {
+          '0%, 100%': { opacity: '0.6' },
+          '50%':      { opacity: '1' },
+        },
+        meshRotate: {
+          '0%':   { transform: 'rotate(0deg) scale(1)' },
+          '33%':  { transform: 'rotate(120deg) scale(1.08)' },
+          '66%':  { transform: 'rotate(240deg) scale(0.95)' },
+          '100%': { transform: 'rotate(360deg) scale(1)' },
+        },
+      },
     },
-    plugins: [require('@tailwindcss/typography')],
-}
+  },
+  plugins: [require('@tailwindcss/typography')],
+};
