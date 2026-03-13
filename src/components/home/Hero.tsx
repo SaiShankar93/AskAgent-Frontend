@@ -3,10 +3,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, Zap, Shield, Globe, MessageSquare, Bot } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type TargetAndTransition, type Variants } from 'framer-motion';
 import { useUser, SignUpButton } from '@clerk/nextjs';
 
-const container = {
+const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -14,17 +14,17 @@ const container = {
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] as const } },
 };
 
-const floatAnimation = {
+const floatAnimation: TargetAndTransition = {
   y: [0, -8, 0],
   transition: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
 };
 
-const floatAnimationSlow = {
+const floatAnimationSlow: TargetAndTransition = {
   y: [0, -6, 0],
   transition: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 },
 };

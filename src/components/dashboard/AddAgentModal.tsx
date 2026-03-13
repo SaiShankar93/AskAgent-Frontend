@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { X, Globe, FileText, Upload, Link as LinkIcon, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { useAgents } from '@/hooks/useAgents';
 
 interface AddAgentModalProps {
@@ -21,12 +21,12 @@ export interface AgentFormData {
 
 type TabType = 'website' | 'document';
 
-const backdropVariants = {
+const backdropVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
 };
 
-const modalVariants = {
+const modalVariants: Variants = {
     hidden: { scale: 0.92, opacity: 0, y: 24 },
     visible: {
         scale: 1,
@@ -42,7 +42,7 @@ const modalVariants = {
     },
 };
 
-const tabContentVariants = {
+const tabContentVariants: Variants = {
     enter: (direction: number) => ({
         x: direction > 0 ? 28 : -28,
         opacity: 0,
@@ -50,7 +50,7 @@ const tabContentVariants = {
     center: {
         x: 0,
         opacity: 1,
-        transition: { duration: 0.28, ease: [0.25, 0.1, 0.25, 1] },
+        transition: { duration: 0.28, ease: [0.25, 0.1, 0.25, 1] as const },
     },
     exit: (direction: number) => ({
         x: direction < 0 ? 28 : -28,

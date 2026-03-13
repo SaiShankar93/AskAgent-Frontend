@@ -1,7 +1,7 @@
 'use client';
 
 import { Globe, FileText, Bot, MessageSquare, Code2, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { type LucideIcon } from 'lucide-react';
 
 interface Step {
@@ -59,7 +59,7 @@ const techStack = [
   { name: 'MongoDB', color: 'text-amber-600 dark:text-amber-400' },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -68,14 +68,14 @@ const containerVariants = {
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };

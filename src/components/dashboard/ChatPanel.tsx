@@ -330,7 +330,7 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
                                 <Upload className="h-7 w-7 text-emerald-500" />
                             </div>
                             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 text-center">Add More Context</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center leading-relaxed">Upload a PDF or Word document to expand <strong className="text-gray-700 dark:text-gray-300">{agentName}</strong>'s knowledge base.</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center leading-relaxed">Upload a PDF or Word document to expand <strong className="text-gray-700 dark:text-gray-300">{agentName}</strong>&apos;s knowledge base.</p>
 
                             {addContextStatus === 'done' ? (
                                 <div className="text-center py-4">
