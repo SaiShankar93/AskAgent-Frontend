@@ -67,7 +67,7 @@ const textareaClasses =
 
 export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentModalProps) {
     const { uploadDocument, scrapeWebsite, loading, error } = useAgents();
-    const [activeTab, setActiveTab] = useState<TabType>('document');
+    const [activeTab, setActiveTab] = useState<TabType>('website');
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -253,11 +253,10 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                             whileHover={{ scale: 1.015 }}
                                             whileTap={{ scale: 0.985 }}
                                             onClick={() => handleTabChange(tab.key)}
-                                            className={`relative flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-t-xl text-sm font-semibold transition-colors duration-200 ${
-                                                isActive
+                                            className={`relative flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-t-xl text-sm font-semibold transition-colors duration-200 ${isActive
                                                     ? 'text-indigo-600 dark:text-indigo-400'
                                                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-                                            }`}
+                                                }`}
                                         >
                                             {isActive && (
                                                 <motion.div
@@ -368,11 +367,10 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                                     onDrop={handleDrop}
                                                     animate={dragActive ? { scale: 1.02 } : { scale: 1 }}
                                                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                                    className={`relative border-2 border-dashed rounded-2xl p-8 text-center transition-colors duration-200 ${
-                                                        dragActive
+                                                    className={`relative border-2 border-dashed rounded-2xl p-8 text-center transition-colors duration-200 ${dragActive
                                                             ? 'border-indigo-400 dark:border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/[0.08]'
                                                             : 'border-gray-200/80 dark:border-white/[0.08] hover:border-gray-300 dark:hover:border-white/[0.14] bg-gray-50/40 dark:bg-white/[0.02]'
-                                                    }`}
+                                                        }`}
                                                 >
                                                     <input
                                                         type="file"
@@ -540,11 +538,10 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
                                             whileTap={{ scale: isFormValid() && uploadStatus !== 'uploading' ? 0.96 : 1 }}
                                             onClick={handleSubmit}
                                             disabled={!isFormValid() || uploadStatus === 'uploading'}
-                                            className={`relative flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 overflow-hidden ${
-                                                isFormValid() && uploadStatus !== 'uploading'
+                                            className={`relative flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 overflow-hidden ${isFormValid() && uploadStatus !== 'uploading'
                                                     ? 'text-white bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 shadow-lg shadow-indigo-500/25 dark:shadow-indigo-500/20 hover:shadow-xl hover:shadow-indigo-500/30'
                                                     : 'text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-white/[0.06] cursor-not-allowed'
-                                            }`}
+                                                }`}
                                         >
                                             {uploadStatus === 'uploading' && (
                                                 <motion.div

@@ -216,13 +216,13 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
 
                 {/* Embed Button — only for website agents */}
                 {agentType !== 'document' && (
-                <button
-                    onClick={() => setShowEmbedModal(true)}
-                    className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 text-white text-sm font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 active:scale-[0.97]"
-                >
-                    <Code className="w-4 h-4" />
-                    <span>Embed</span>
-                </button>
+                    <button
+                        onClick={() => setShowEmbedModal(true)}
+                        className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 text-white text-sm font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 active:scale-[0.97]"
+                    >
+                        <Code className="w-4 h-4" />
+                        <span>Embed</span>
+                    </button>
                 )}
 
                 {/* Add Context Button */}
@@ -429,11 +429,10 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
                                         <button
                                             key={fw.id}
                                             onClick={() => setSelectedFramework(fw.id)}
-                                            className={`relative flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${
-                                                selectedFramework === fw.id
+                                            className={`relative flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${selectedFramework === fw.id
                                                     ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-400 shadow-sm'
                                                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-                                            }`}
+                                                }`}
                                         >
                                             <span>{fw.icon}</span>
                                             <span>{fw.name}</span>
@@ -448,11 +447,10 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
                                     <div className="absolute top-3 right-3 z-10">
                                         <button
                                             onClick={() => handleCopyCode(getEmbedCode())}
-                                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                                                copiedCode
+                                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${copiedCode
                                                     ? 'bg-emerald-500 text-white'
                                                     : 'bg-gray-700/80 hover:bg-gray-600 text-gray-300 opacity-0 group-hover:opacity-100'
-                                            }`}
+                                                }`}
                                         >
                                             {copiedCode ? (
                                                 <>
@@ -533,16 +531,14 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
                             exit={{ opacity: 0, y: -8 }}
                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            <div className={`flex gap-3 max-w-[80%] md:max-w-[70%] ${
-                                message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
-                            }`}>
+                            <div className={`flex gap-3 max-w-[80%] md:max-w-[70%] ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
+                                }`}>
                                 {/* Avatar */}
                                 <motion.div
-                                    className={`flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center shadow-lg ${
-                                        message.role === 'user'
+                                    className={`flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center shadow-lg ${message.role === 'user'
                                             ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-amber-500/25'
                                             : 'bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-indigo-500/25'
-                                    }`}
+                                        }`}
                                     whileHover={{ scale: 1.1, rotate: 5 }}
                                     transition={{ type: 'spring', stiffness: 300 }}
                                 >
@@ -556,11 +552,10 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
                                 {/* Message Bubble */}
                                 <div className="min-w-0">
                                     <motion.div
-                                        className={`px-4 py-3 backdrop-blur-sm ${
-                                            message.role === 'user'
+                                        className={`px-4 py-3 backdrop-blur-sm ${message.role === 'user'
                                                 ? 'bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 text-white rounded-2xl rounded-tr-sm shadow-lg shadow-indigo-500/20'
                                                 : 'bg-white/80 dark:bg-white/[0.06] text-gray-900 dark:text-gray-100 rounded-2xl rounded-tl-sm shadow-lg shadow-black/[0.03] dark:shadow-black/10 border border-gray-200/60 dark:border-white/[0.08]'
-                                        }`}
+                                            }`}
                                         whileHover={{ scale: 1.005 }}
                                         transition={{ type: 'spring', stiffness: 400 }}
                                     >
@@ -585,7 +580,7 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
                                         )}
 
                                         {/* Metadata badges for assistant messages */}
-                                        {message.role === 'assistant' && message.metadata && (
+                                        {/* {message.role === 'assistant' && message.metadata && (
                                             <div className="mt-3 pt-3 border-t border-gray-200/40 dark:border-white/[0.06] text-xs flex items-center gap-2 flex-wrap">
                                                 {message.metadata.chunksRetrieved !== undefined && (
                                                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-100/80 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full font-medium">
@@ -600,13 +595,12 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
                                                     </span>
                                                 )}
                                             </div>
-                                        )}
+                                        )} */}
                                     </motion.div>
 
                                     {/* Timestamp */}
-                                    <p className={`text-[11px] text-gray-400 dark:text-gray-500 mt-1.5 px-1 font-medium ${
-                                        message.role === 'user' ? 'text-right' : 'text-left'
-                                    }`}>
+                                    <p className={`text-[11px] text-gray-400 dark:text-gray-500 mt-1.5 px-1 font-medium ${message.role === 'user' ? 'text-right' : 'text-left'
+                                        }`}>
                                         {formatMessageTime(message.created_at)}
                                     </p>
                                 </div>

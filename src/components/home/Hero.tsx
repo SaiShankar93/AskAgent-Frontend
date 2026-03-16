@@ -126,7 +126,7 @@ export default function Hero() {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
                 </span>
                 <span className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-violet-400">
-                  Powered by RAG + OpenAI
+                  Powered by RAG
                 </span>
               </span>
             </motion.div>
