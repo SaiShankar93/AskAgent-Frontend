@@ -8,7 +8,7 @@ import { useAgents } from '@/hooks/useAgents';
 interface AddAgentModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onSuccess?: () => void;
+    onSuccess?: (agent: { id: string; name: string; type: 'website' | 'document'; status?: string }) => void;
 }
 
 export interface AgentFormData {
@@ -143,30 +143,28 @@ export default function AddAgentModal({ isOpen, onClose, onSuccess }: AddAgentMo
 
         try {
             setUploadStatus('uploading');
+            let result: import('@/hooks/useAgents').CreateAgentResponse | undefined;
 
             if (activeTab === 'document' && selectedFile) {
-                // Upload document
-                await uploadDocument({
+                result = await uploadDocument({
                     file: selectedFile,
                     name: formData.name,
                     description: formData.description,
                 });
             } else if (activeTab === 'website' && formData.url) {
-                // Scrape website
-                await scrapeWebsite(formData.url, formData.name, formData.description);
+                result = await scrapeWebsite(formData.url, formData.name, formData.description);
             }
 
             setUploadStatus('success');
 
-            // Show success message briefly then close
+            // Close immediately and pass the new agent to parent
             setTimeout(() => {
-                onSuccess?.();
+                onSuccess?.(result?.data as any);
                 onClose();
-                // Reset form
                 setFormData({ name: '', description: '', url: '' });
                 setSelectedFile(null);
                 setUploadStatus('idle');
-            }, 1500);
+            }, 800);
 
         } catch (err) {
             console.error('Error creating agent:', err);

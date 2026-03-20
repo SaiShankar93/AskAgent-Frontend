@@ -10,6 +10,7 @@ export interface Agent {
     user_id: string;
     name: string;
     type: 'website' | 'document';
+    status: 'pending' | 'processing' | 'ready' | 'failed';
     description: string;
     logo_url?: string;
     source_url?: string;
@@ -22,7 +23,8 @@ export interface Agent {
 export interface CreateAgentResponse {
     success: boolean;
     message: string;
-    status: 'processing';
+    status: string;
+    data?: Agent;  // newly created agent record
 }
 
 export interface UploadDocumentParams {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Send, Bot, User, Loader2, AlertCircle, Sparkles, Code, X, Copy, Check, Trash2, Plus, Upload, FileText } from 'lucide-react';
@@ -8,12 +8,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useChat } from '@/hooks/useChat';
 import { useAgents } from '@/hooks/useAgents';
 import { getEmbedCode as getEmbedCodeTemplate, Framework } from './embedCodeTemplates';
+import AgentProgressPanel from './AgentProgressPanel';
 
 interface ChatPanelProps {
     agentId: string | null;
     agentName?: string;
     agentType?: 'website' | 'document';
+    agentStatus?: 'pending' | 'processing' | 'ready' | 'failed'; // NEW
     onDeleteAgent?: () => Promise<void>;
+    onAgentReady?: () => void;  // NEW — called when ingestion finishes
 }
 
 // Simple time formatter
@@ -38,7 +41,7 @@ const featureItems = [
     { icon: Bot, label: 'AI Chat', gradient: 'from-amber-500 to-orange-500', shadow: 'shadow-amber-500/25' },
 ];
 
-export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent }: ChatPanelProps) {
+export default function ChatPanel({ agentId, agentName, agentType, agentStatus, onDeleteAgent, onAgentReady }: ChatPanelProps) {
     const [inputMessage, setInputMessage] = useState('');
     const [showEmbedModal, setShowEmbedModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -48,10 +51,24 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
     const [isDeleting, setIsDeleting] = useState(false);
     const [selectedFramework, setSelectedFramework] = useState<Framework>('react');
     const [copiedCode, setCopiedCode] = useState(false);
+    // Track whether this agent is still processing — starts from prop, clears on ready
+    const [isPending, setIsPending] = useState(
+        agentStatus === 'pending' || agentStatus === 'processing'
+    );
     const addContextInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const { addContext } = useAgents();
+
+    // When agentId changes (e.g. user switches agents), reset pending state
+    useEffect(() => {
+        setIsPending(agentStatus === 'pending' || agentStatus === 'processing');
+    }, [agentId, agentStatus]);
+
+    const handleAgentReady = useCallback(() => {
+        setIsPending(false);
+        onAgentReady?.();
+    }, [onAgentReady]);
 
     const { messages, loading, sending, error, fetchHistory, sendMessage } = useChat(agentId);
 
@@ -104,7 +121,42 @@ export default function ChatPanel({ agentId, agentName, agentType, onDeleteAgent
         }
     };
 
-    // ─── No Agent Selected ───────────────────────────────────────────────
+    // ─── Pending / Processing: show live progress panel ────────────────────
+    if (agentId && isPending) {
+        return (
+            <div className="h-full flex flex-col">
+                <motion.div
+                    className="bg-white/70 dark:bg-gray-950/70 backdrop-blur-2xl border-b border-gray-200/40 dark:border-white/[0.06] px-6 py-4 flex items-center gap-4"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                >
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-indigo-500/25 ring-2 ring-white/20">
+                        {agentName?.substring(0, 2).toUpperCase() || 'AI'}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-gray-900 dark:text-white truncate">{agentName || 'AI Agent'}</h3>
+                        <div className="flex items-center gap-2 mt-0.5">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+                            </span>
+                            <p className="text-xs text-amber-500 dark:text-amber-400 font-medium">Setting up...</p>
+                        </div>
+                    </div>
+                </motion.div>
+
+                <AgentProgressPanel
+                    agentId={agentId}
+                    agentName={agentName || 'Agent'}
+                    agentType={agentType || 'website'}
+                    onReady={handleAgentReady}
+                />
+            </div>
+        );
+    }
+
+    // ─── No Agent Selected ────────────────────────────────────────────────
     if (!agentId) {
         return (
             <div className="h-full flex items-center justify-center bg-transparent">
