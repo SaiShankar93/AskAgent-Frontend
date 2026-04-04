@@ -53,10 +53,17 @@ export function useAgentProgress({ agentId, enabled = true, onDone, onFailed }: 
             return;
         }
 
-        const apiBase = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000';
+        // Socket.io lives on the Node server root (/socket.io/), not under /api. If your reverse
+        // proxy only forwards /api to Node, you must also proxy /socket.io/ (WebSocket upgrade)
+        // or set NEXT_PUBLIC_SOCKET_URL to the backend origin (e.g. https://api.yourdomain.com).
+        const apiBase =
+            process.env.NEXT_PUBLIC_SOCKET_URL?.replace(/\/$/, '') ||
+            process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, '') ||
+            'http://localhost:5000';
 
         const socket = io(apiBase, {
-            transports: ['websocket', 'polling'],
+            // Polling-first survives many nginx misconfigs where WS upgrade fails but HTTP still reaches Node.
+            transports: ['polling', 'websocket'],
             reconnectionAttempts: 5,
         });
 
@@ -69,6 +76,10 @@ export function useAgentProgress({ agentId, enabled = true, onDone, onFailed }: 
         });
 
         socket.on('disconnect', () => setConnected(false));
+
+        socket.on('connect_error', (err) => {
+            console.warn('[Socket] connect_error:', err.message, '| url:', apiBase);
+        });
 
         socket.on('agent:progress', (event: ProgressEvent) => {
             setProgress(event);
