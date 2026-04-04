@@ -19,12 +19,32 @@ interface UseVoiceChatOptions {
     onSessionEnd?: () => void;
 }
 
-// Extend Window to include webkit-prefixed SpeechRecognition for Safari
-declare global {
-    interface Window {
-        SpeechRecognition: typeof SpeechRecognition;
-        webkitSpeechRecognition: typeof SpeechRecognition;
-    }
+// Self-contained Speech Recognition types — avoids conflicts with whatever
+// version of lib.dom.d.ts the TypeScript installation has.
+
+interface SpeechRecogResult extends Event {
+    readonly resultIndex: number;
+    readonly results: {
+        readonly length: number;
+        [i: number]: {
+            readonly isFinal: boolean;
+            readonly length: number;
+            [j: number]: { readonly transcript: string };
+        };
+    };
+}
+
+interface SpeechRecognitionInstance {
+    continuous: boolean;
+    interimResults: boolean;
+    lang: string;
+    maxAlternatives: number;
+    start(): void;
+    stop(): void;
+    abort(): void;
+    onresult: ((event: SpeechRecogResult) => void) | null;
+    onend:    (() => void) | null;
+    onerror:  ((event: { error: string }) => void) | null;
 }
 
 export function useVoiceChat({ agentId, isWidget = false, onSessionEnd }: UseVoiceChatOptions) {
@@ -36,7 +56,7 @@ export function useVoiceChat({ agentId, isWidget = false, onSessionEnd }: UseVoi
     const [error, setError]             = useState<string | null>(null);
 
     // Stable refs so recognition callbacks never go stale
-    const recognitionRef  = useRef<SpeechRecognition | null>(null);
+    const recognitionRef  = useRef<SpeechRecognitionInstance | null>(null);
     const audioRef        = useRef<HTMLAudioElement | null>(null);
     const audioUrlRef     = useRef<string | null>(null);
     const voiceStateRef   = useRef<VoiceState>('idle');
@@ -50,9 +70,9 @@ export function useVoiceChat({ agentId, isWidget = false, onSessionEnd }: UseVoi
     isWidgetRef.current   = isWidget;
     getTokenRef.current   = getToken;
 
-    const isSupported =
-        typeof window !== 'undefined' &&
-        ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = typeof window !== 'undefined' ? (window as any) : null;
+    const isSupported = !!(w?.SpeechRecognition || w?.webkitSpeechRecognition);
 
     // ── Audio helpers ─────────────────────────────────────────────────────
     const cleanupAudio = () => {
@@ -159,8 +179,11 @@ export function useVoiceChat({ agentId, isWidget = false, onSessionEnd }: UseVoi
     };
 
     // ── Web Speech Recognition setup ─────────────────────────────────────
-    const initRecognition = (): SpeechRecognition | null => {
-        const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const initRecognition = (): SpeechRecognitionInstance | null => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const win = window as any;
+        const SpeechAPI: (new () => SpeechRecognitionInstance) | undefined =
+            win.SpeechRecognition || win.webkitSpeechRecognition;
         if (!SpeechAPI) return null;
 
         const rec = new SpeechAPI();
@@ -169,7 +192,7 @@ export function useVoiceChat({ agentId, isWidget = false, onSessionEnd }: UseVoi
         rec.lang            = 'en-US';
         rec.maxAlternatives = 1;
 
-        rec.onresult = (event: SpeechRecognitionEvent) => {
+        rec.onresult = (event: SpeechRecogResult) => {
             let interim = '';
             let final   = '';
 
@@ -194,7 +217,7 @@ export function useVoiceChat({ agentId, isWidget = false, onSessionEnd }: UseVoi
             }
         };
 
-        rec.onerror = (event: SpeechRecognitionErrorEvent) => {
+        rec.onerror = (event) => {
             if (event.error === 'no-speech') {
                 // Expected in silence — just restart
                 if (voiceStateRef.current === 'listening') {
