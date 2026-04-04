@@ -3,12 +3,14 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Send, Bot, User, Loader2, AlertCircle, Sparkles, Code, X, Copy, Check, Trash2, Plus, Upload, FileText } from 'lucide-react';
+import { Send, Bot, User, Loader2, AlertCircle, Sparkles, Code, X, Copy, Check, Trash2, Plus, Upload, FileText, Mic } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useChat } from '@/hooks/useChat';
 import { useAgents } from '@/hooks/useAgents';
 import { getEmbedCode as getEmbedCodeTemplate, Framework } from './embedCodeTemplates';
 import AgentProgressPanel from './AgentProgressPanel';
+import VoiceModal from './VoiceModal';
+import { useVoiceChat } from '@/hooks/useVoiceChat';
 
 interface ChatPanelProps {
     agentId: string | null;
@@ -55,10 +57,26 @@ export default function ChatPanel({ agentId, agentName, agentType, agentStatus, 
     const [isPending, setIsPending] = useState(
         agentStatus === 'pending' || agentStatus === 'processing'
     );
+    const [showVoiceModal, setShowVoiceModal] = useState(false);
+
     const addContextInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const { addContext } = useAgents();
+
+    const {
+        voiceState, turns: voiceTurns, interimText, error: voiceError,
+        isSupported: voiceSupported,
+        start: startVoice, mute: muteVoice, unmute: unmuteVoice, end: endVoice,
+    } = useVoiceChat({
+        agentId,
+        isWidget: false,
+        onSessionEnd: () => {
+            setShowVoiceModal(false);
+            // Refresh chat history so voice messages appear in the panel
+            fetchHistory();
+        },
+    });
 
     // When agentId changes (e.g. user switches agents), reset pending state
     useEffect(() => {
@@ -713,6 +731,21 @@ export default function ChatPanel({ agentId, agentName, agentType, agentStatus, 
                         className="flex-1 resize-none px-5 py-3.5 bg-gray-100/80 dark:bg-white/[0.05] backdrop-blur-sm border border-gray-200/50 dark:border-white/[0.08] rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/40 dark:focus:ring-indigo-400/30 dark:focus:border-indigo-400/30 max-h-32 transition-all text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
                         disabled={sending || !agentId}
                     />
+
+                    {/* Voice button — only shown when agent is ready and browser supports it */}
+                    {voiceSupported && agentId && (
+                        <motion.button
+                            type="button"
+                            onClick={() => { setShowVoiceModal(true); startVoice(); }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            title="Start voice chat"
+                            className="flex-shrink-0 w-12 h-12 bg-violet-500/10 hover:bg-violet-500/20 dark:bg-violet-500/10 dark:hover:bg-violet-500/20 text-violet-600 dark:text-violet-400 rounded-2xl flex items-center justify-center transition-all border border-violet-500/20 hover:border-violet-500/40"
+                        >
+                            <Mic className="h-5 w-5" />
+                        </motion.button>
+                    )}
+
                     <motion.button
                         type="submit"
                         disabled={!inputMessage.trim() || sending || !agentId}
@@ -733,6 +766,22 @@ export default function ChatPanel({ agentId, agentName, agentType, agentStatus, 
                     </motion.button>
                 </form>
             </div>
+
+            {/* ── Voice Modal (full-screen overlay) ────────────────────── */}
+            <AnimatePresence>
+                {showVoiceModal && (
+                    <VoiceModal
+                        agentName={agentName || 'AI Agent'}
+                        voiceState={voiceState}
+                        turns={voiceTurns}
+                        interimText={interimText}
+                        error={voiceError}
+                        onMute={muteVoice}
+                        onUnmute={unmuteVoice}
+                        onEnd={() => { endVoice(); setShowVoiceModal(false); }}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }
